@@ -76,7 +76,7 @@ const IndexPage = () => (
             Sted: {viewmodel.event.city}, {viewmodel.event.country}
           </Paragraph>
         </div>
-        <ButtonGroup>
+        <ButtonGroup numberOfButtons={1}>
           <SafeLink to="/schedule/">Program</SafeLink>
         </ButtonGroup>
         <a href="#info">

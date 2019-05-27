@@ -3,17 +3,19 @@ import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
 const StyledButtonGroup = styled.div`
-  & > * {
-    margin-right: 0.4rem;
-  }
+  display: grid;
+  grid-template-columns: ${p =>
+    `repeat(${p.numberOfButtons}, auto [col-start])`};
+  grid-column-gap: 10px;
 `;
 
-const ButtonGroup = ({ children, ...rest }) => (
-  <StyledButtonGroup {...rest}>{children}</StyledButtonGroup>
-);
+const ButtonGroup = ({ children, ...rest }) => {
+  return <StyledButtonGroup {...rest}>{children}</StyledButtonGroup>;
+};
 
 ButtonGroup.propTypes = {
   css: PropTypes.string,
+  numberOfButtons: PropTypes.number.isRequired,
 };
 
 export default ButtonGroup;

@@ -7,6 +7,7 @@ import Button from '../components/Button';
 import Slot from '../components/Slot';
 import Content, { ContentContainer, TopContent } from '../components/Content';
 import colors from '../util/colors';
+import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
 import SafeLink from '../components/SafeLink';
 
@@ -15,9 +16,6 @@ const buttonGroupStyle = css`
 `;
 
 const pickDayButtonsStyle = css`
-  margin: 0 auto;
-  z-index: 1;
-
   @media (${mediaQueries.medium}) {
     display: none;
   }
@@ -55,6 +53,17 @@ const linkStyle = css`
   }
 `;
 
+const StyledDay = styled.div`
+  border: 1px solid ${colors.greyLight};
+  padding: 0 ${spacing.small};
+  margin: ${spacing.large} 0;
+`;
+
+const StyledDayHeader = styled.h1`
+  text-align: center;
+  margin: ${spacing.large} 0;
+`;
+
 class SchedulePage extends React.Component {
   constructor() {
     super();
@@ -67,7 +76,9 @@ class SchedulePage extends React.Component {
 
   onDayClick(evt, activeIndex) {
     evt.preventDefault();
-    this.setState({ activeIndex });
+    this.setState({ activeIndex }, () => {
+      window.location.hash = `#${activeIndex}`;
+    });
   }
 
   onSelectChange(evt) {
@@ -75,9 +86,10 @@ class SchedulePage extends React.Component {
   }
 
   render() {
+    const { activeIndex } = this.state;
     const activeDay =
-      viewmodel && viewmodel.schedules[this.state.activeIndex]
-        ? viewmodel.schedules[this.state.activeIndex]
+      viewmodel && viewmodel.schedules[activeIndex]
+        ? viewmodel.schedules[activeIndex]
         : undefined;
     if (!activeDay || !activeDay.day) {
       return <span>Her skjedde noe feil gitt...</span>;
@@ -86,39 +98,46 @@ class SchedulePage extends React.Component {
       <Content backgroundColor={colors.greyLightest}>
         <TopContent>
           <StyledHeader>Program</StyledHeader>
-          <ButtonGroup css={buttonGroupStyle}>
+          <ButtonGroup css={buttonGroupStyle} numberOfButtons={1}>
             <SafeLink to="/" css={linkStyle}>
               Forside
             </SafeLink>
           </ButtonGroup>
         </TopContent>
 
-        <ButtonGroup css={pickDayButtonsStyle}>
-          {viewmodel.schedules.map((day, index) => (
-            <Button
-              key={day.day}
-              appearance={this.state.activeIndex === index ? 'active' : ''}
-              onClick={evt => this.onDayClick(evt, index)}>
-              {day.day}
-            </Button>
-          ))}
-        </ButtonGroup>
-        <StyledSelect onChange={this.onSelectChange}>
-          {viewmodel.schedules.map((day, index) => (
-            <option
-              key={day.day}
-              value={index}
-              onClick={evt => this.onDayClick(evt, index)}>
-              {day.day}
-            </option>
-          ))}
-        </StyledSelect>
         <ContentContainer backgroundColor={colors.greyLightest}>
-          {activeDay.collections.map((collection, index) => (
-            <Slot
-              key={`${collection.title}_${index}`}
-              collection={collection}
-            />
+          <ButtonGroup numberOfButtons={viewmodel.schedules.length}>
+            {viewmodel.schedules.map((day, index) => (
+              <Button
+                key={day.day}
+                css={pickDayButtonsStyle}
+                arrowBottom
+                appearance={activeIndex === index ? 'active' : ''}
+                onClick={evt => this.onDayClick(evt, index)}>
+                {day.day}
+              </Button>
+            ))}
+          </ButtonGroup>
+          <StyledSelect onChange={this.onSelectChange}>
+            {viewmodel.schedules.map((day, index) => (
+              <option
+                key={day.day}
+                value={index}
+                onClick={evt => this.onDayClick(evt, index)}>
+                {day.day}
+              </option>
+            ))}
+          </StyledSelect>
+          {viewmodel.schedules.map((day, index) => (
+            <StyledDay id={index}>
+              <StyledDayHeader>{day.day}</StyledDayHeader>
+              {day.collections.map((collection, index) => (
+                <Slot
+                  key={`${collection.title}_${index}`}
+                  collection={collection}
+                />
+              ))}
+            </StyledDay>
           ))}
         </ContentContainer>
       </Content>

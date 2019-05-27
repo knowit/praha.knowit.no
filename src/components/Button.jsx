@@ -45,16 +45,33 @@ const appearances = {
   active: hoverStyle,
 };
 
-const StyledButton = styled.button`
+const arrowBottomCss = css`
+  position: relative;
+  &:after {
+    top: 100%;
+    left: 50%;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-top-color: ${darken(0.1, colors.primary)};
+    border-width: 15px;
+    margin-left: -15px;
+  }
+`;
+
+export const StyledButton = styled.button`
   padding: 0.8rem 3rem;
   background-color: ${colors.primary};
   text-decoration: none;
   color: white;
   font-size: 1.2rem;
   font-weight: 100;
-  border-radius: 4px;
+  border-radius: 0;
   border: 1px solid ${colors.primary};
-  box-shadow: 0 6px 6px -6px black;
+  ${p => p.appearance === 'active' && p.arrowBottom && arrowBottomCss}
   &:hover,
   &:focus {
     ${hoverStyle};
@@ -71,6 +88,7 @@ const Button = ({ appearance, children, ...rest }) => (
 
 Button.propTypes = {
   appearance: PropTypes.string,
+  arrowBottom: PropTypes.bool,
 };
 
 export default Button;

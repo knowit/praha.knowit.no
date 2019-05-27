@@ -29,7 +29,7 @@ const VillageMarkdown = ({
   return (
     <Content backgroundColor={colors.greyLightest}>
       <TopContent backgroundColor={colors.knowit.green}>
-        <ButtonGroup css={buttonGroupStyle}>
+        <ButtonGroup css={buttonGroupStyle} numberOfButtons={1}>
           <SafeLink hoverColor={colors.knowit.green} to="/schedule/">
             Program
           </SafeLink>
