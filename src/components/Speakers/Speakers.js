@@ -64,6 +64,9 @@ Speaker.propTypes = {
 };
 
 const Speakers = ({ talk: { speakers, title }, talkKey }) => {
+  if (!speakers) {
+    return null;
+  }
   return (
     <div id={talkKey}>
       <StyledDivider />
@@ -87,7 +90,7 @@ Speakers.propTypes = {
         bio: PropTypes.string,
       }),
     ),
-  }).isRequired,
+  }),
   talkKey: PropTypes.string.isRequired,
 };
 
