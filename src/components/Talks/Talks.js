@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import Talk from './Talk';
-import colors from '../../util/colors';
+import { oldColors as colors } from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 
 const StyledTalksContainer = styled.div`

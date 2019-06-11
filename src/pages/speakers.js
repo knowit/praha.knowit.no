@@ -5,7 +5,7 @@ import viewmodel from '../json';
 import Speakers from '../components/Speakers';
 import ButtonGroup from '../components/ButtonGroup';
 import Content, { ContentContainer, TopContent } from '../components/Content';
-import colors from '../util/colors';
+import { oldColors } from '../util/colors';
 import SafeLink from '../components/SafeLink';
 
 const buttonGroupStyle = css`
@@ -18,14 +18,14 @@ const StyledHeader = styled.h1`
 
 const SpeakersPage = props => {
   return (
-    <Content backgroundColor={colors.greyLightest}>
-      <TopContent backgroundColor={colors.secondary}>
+    <Content backgroundColor={oldColors.greyLightest}>
+      <TopContent backgroundColor={oldColors.secondary}>
         <StyledHeader>Talere</StyledHeader>
         <ButtonGroup css={buttonGroupStyle} numberOfButtons={2}>
-          <SafeLink hoverColor={colors.secondary} to="/">
+          <SafeLink hoverColor={oldColors.secondary} to="/">
             Forside
           </SafeLink>
-          <SafeLink hoverColor={colors.secondary} to="/schedule/">
+          <SafeLink hoverColor={oldColors.secondary} to="/schedule/">
             Skjema
           </SafeLink>
         </ButtonGroup>

@@ -6,8 +6,8 @@ import colors from '../util/colors';
 import darken from 'polished/lib/color/darken';
 
 const hoverStyle = css`
-  background-color: ${darken(0.1, colors.primary)};
-  border: 1px solid ${darken(0.1, colors.primary)};
+  background-color: ${darken(0.1, colors.blue)};
+  border: 1px solid ${darken(0.1, colors.blue)};
   color: white;
 `;
 
@@ -33,12 +33,12 @@ const appearances = {
   `,
   outline: css`
     background-color: white;
-    color: ${colors.primary};
+    color: ${colors.blue};
 
     &:hover,
     &:focus {
-      background-color: ${colors.primary};
-      border-color: ${colors.primary};
+      background-color: ${colors.blue};
+      border-color: ${colors.blue};
       color: white;
     }
   `,
@@ -56,7 +56,7 @@ const arrowBottomCss = css`
     width: 0;
     position: absolute;
     pointer-events: none;
-    border-top-color: ${darken(0.1, colors.primary)};
+    border-top-color: ${darken(0.1, colors.blue)};
     border-width: 15px;
     margin-left: -15px;
   }
@@ -64,13 +64,12 @@ const arrowBottomCss = css`
 
 export const StyledButton = styled.button`
   padding: 0.8rem 3rem;
-  background-color: ${colors.primary};
-  text-decoration: none;
+  background-color: ${colors.blue};
+  border: 1px solid ${colors.blue};
   color: white;
   font-size: 1.2rem;
   font-weight: 100;
-  border-radius: 0;
-  border: 1px solid ${colors.primary};
+  border-radius: 30px;
   ${p => p.appearance === 'active' && p.arrowBottom && arrowBottomCss}
   &:hover,
   &:focus {

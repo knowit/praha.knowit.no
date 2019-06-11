@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import colors from '../../util/colors';
+import { oldColors as colors } from '../../util/colors';
 
 const StyledTopContent = styled.div`
   background-color: ${p => p.backgroundColor || colors.primary};

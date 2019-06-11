@@ -16,10 +16,6 @@ const globalStyles = css`
     font-family: 'Raleway', sans-serif;
   }
 
-  svg {
-    width: 30px;
-    height: 30px;
-  }
   .c-schedule-transition-enter {
     opacity: 0.01;
   }

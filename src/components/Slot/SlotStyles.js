@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import colors from '../../util/colors';
+import { oldColors as colors } from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 import spacing from '../../util/spacing';
 

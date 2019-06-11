@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import viewmodel from '../json';
-import colors from '../util/colors';
+import { oldColors as colors } from '../util/colors';
 import mediaQueries from '../util/mediaQueries';
 
 const StyledGoogleMapsWrapper = styled.div`

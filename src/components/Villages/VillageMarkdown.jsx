@@ -4,7 +4,7 @@ import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import Content, { ContentContainer, TopContent } from '../Content';
-import colors from '../../util/colors';
+import { oldColors as colors } from '../../util/colors';
 import spacing from '../../util/spacing';
 import ButtonGroup from '../ButtonGroup';
 import markdownStyle from './markdownStyle';

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import styled from '@emotion/styled';
-import colors from '../../util/colors';
+import { oldColors as colors } from '../../util/colors';
 import spacing from '../../util/spacing';
 import mediaQueries from '../../util/mediaQueries';
 import HardwareGuild from '../Icons/HardwareGuild';

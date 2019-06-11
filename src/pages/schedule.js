@@ -6,7 +6,7 @@ import ButtonGroup from '../components/ButtonGroup';
 import Button from '../components/Button';
 import Slot from '../components/Slot';
 import Content, { ContentContainer, TopContent } from '../components/Content';
-import colors from '../util/colors';
+import { oldColors as colors } from '../util/colors';
 import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
 import SafeLink from '../components/SafeLink';
