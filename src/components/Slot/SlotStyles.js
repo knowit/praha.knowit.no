@@ -1,31 +1,15 @@
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import { oldColors as colors } from '../../util/colors';
+import colors from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 import spacing from '../../util/spacing';
-
-const slotTitleStyles = {
-  grey: css`
-    text-align: center;
-    color: black;
-    background-color: ${colors.greyLight};
-    border: 1px solid ${colors.greyLight};
-  `,
-  white: css`
-    border: 1px solid ${colors.greyLight};
-    background-color: white;
-    color: black;
-    @media (${mediaQueries.medium}) {
-      border-left: none;
-      border-right: none;
-    }
-  `,
-};
 
 const StyledSlot = styled.div`
   margin-top: 1rem;
   display: flex;
+  background-color: white;
   flex-flow: row;
+  border-radius: 5px;
 
   &:last-child {
     margin-bottom: ${spacing.large};
@@ -39,7 +23,7 @@ const StyledSlot = styled.div`
 const StyledSlotTime = styled.span`
   align-self: center;
   width: 10%;
-
+  margin-left: ${spacing.normal};
   @media (${mediaQueries.medium}) {
     align-self: center;
     width: 100%;
@@ -48,7 +32,7 @@ const StyledSlotTime = styled.span`
   }
 `;
 
-const StyledSlotTitle = styled.div`
+const StyledSlotContent = styled.div`
   padding: 1rem 0;
   width: 90%;
   @media (${mediaQueries.medium}) {
@@ -56,7 +40,14 @@ const StyledSlotTitle = styled.div`
     font-weight: bold;
     width: 100%;
   }
-  ${p => (p.background ? slotTitleStyles[p.background] : '')};
 `;
 
-export { StyledSlot, StyledSlotTime, StyledSlotTitle };
+const StyledSlotType = styled.div`
+  background-color: ${colors.green};
+  width: ${spacing.small};
+  border: 1px solid ${colors.green};
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+`;
+
+export { StyledSlot, StyledSlotTime, StyledSlotContent, StyledSlotType };

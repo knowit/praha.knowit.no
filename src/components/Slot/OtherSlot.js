@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import { StyledSlot, StyledSlotTime, StyledSlotTitle } from './SlotStyles';
+import {
+  StyledSlot,
+  StyledSlotTime,
+  StyledSlotContent,
+  StyledSlotType,
+} from './SlotStyles';
 import Villages from '../Villages/Villages';
 
 const StyledSpan = styled.span`
@@ -12,11 +17,11 @@ const StyledSpan = styled.span`
 const OtherSlot = ({ collection }) => {
   return (
     <StyledSlot>
+      <StyledSlotType type="other" />
       <StyledSlotTime>{collection.time}</StyledSlotTime>
-      <StyledSlotTitle background="white">
+      <StyledSlotContent>
         <StyledSpan>{collection.title}</StyledSpan>
-        <Villages villages={collection.villages} />
-      </StyledSlotTitle>
+      </StyledSlotContent>
     </StyledSlot>
   );
 };

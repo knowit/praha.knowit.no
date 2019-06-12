@@ -1,8 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import Seperator from './Seperator';
-import colors from '../util/colors';
 import styled from '@emotion/styled';
+import colors from '../util/colors';
+import mediaQueries from '../util/mediaQueries';
 
 const StyledSection = styled.div`
   background-color: ${p => p.backgroundColor || colors.blueLighest};
@@ -10,8 +11,15 @@ const StyledSection = styled.div`
   color: ${p => p.color || 'black'};
 `;
 const StyledInnerSection = styled.div`
-  padding: 1rem 30%;
+  padding: 1rem 15%;
   min-height: ${p => p.minHeight || '50vh'};
+  @media (${mediaQueries.xxlarge}) {
+    padding: 0 20%;
+  }
+
+  @media (${mediaQueries.medium}) {
+    padding: 0;
+  }
 `;
 
 const ContentSection = ({

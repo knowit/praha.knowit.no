@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { StyledSlot, StyledSlotTime, StyledSlotTitle } from './SlotStyles';
+import { StyledSlot, StyledSlotTime, StyledSlotContent } from './SlotStyles';
 
 const BreakSlot = ({ collection }) => {
   return (
     <StyledSlot>
       <StyledSlotTime>{collection.time}</StyledSlotTime>
-      <StyledSlotTitle background="grey">
+      <StyledSlotContent>
         <span>{collection.title}</span>
-      </StyledSlotTitle>
+      </StyledSlotContent>
     </StyledSlot>
   );
 };
