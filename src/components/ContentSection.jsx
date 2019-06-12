@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import Seperator from './Seperator';
 import colors from '../util/colors';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 
 const StyledSection = styled.div`
   background-color: ${p => p.backgroundColor || colors.blueLighest};
-  min-height: 50vh;
+  min-height: ${p => p.minHeight || '50vh'};
   color: ${p => p.color || 'black'};
 `;
 const StyledInnerSection = styled.div`
-  padding: 0 30%;
+  padding: 1rem 30%;
+  min-height: ${p => p.minHeight || '50vh'};
 `;
 
 const ContentSection = ({
@@ -19,12 +19,13 @@ const ContentSection = ({
   withBottomSeperator,
   previousSectionColor,
   nextSectionColor,
+  minHeight,
   children,
   ...rest
 }) => {
   return (
     <Fragment>
-      <StyledSection {...rest}>
+      <StyledSection minHeight={minHeight} {...rest}>
         {withTopSeperator && (
           <Seperator
             previousSectionColor={previousSectionColor}
@@ -32,7 +33,9 @@ const ContentSection = ({
             position="top"
           />
         )}
-        <StyledInnerSection>{children}</StyledInnerSection>
+        <StyledInnerSection minHeight={minHeight}>
+          {children}
+        </StyledInnerSection>
         {withBottomSeperator && (
           <Seperator
             previousSectionColor={previousSectionColor}
@@ -55,6 +58,7 @@ ContentSection.propTypes = {
   withTopSeperator: PropTypes.bool,
   previousSectionColor: PropTypes.string,
   nextSectionColor: PropTypes.string,
+  minHeight: PropTypes.string,
 };
 
 export default ContentSection;

@@ -1,18 +1,14 @@
 import React from 'react';
 import Favorite from '@material-ui/icons/Favorite';
-import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import spacing from '../../util/spacing';
 import colors from '../../util/colors';
-const StyledHeader = styled.h2`
-  display: flex;
-  align-items: center;
-`;
+import HeaderTwoWithIcon from '../HeaderTwoWithIcon';
 
 const Favorites = () => {
   return (
     <div>
-      <StyledHeader>
+      <HeaderTwoWithIcon>
         <Favorite
           css={css`
             margin-right: ${spacing.small};
@@ -20,7 +16,7 @@ const Favorites = () => {
           `}
         />
         Favoritter
-      </StyledHeader>
+      </HeaderTwoWithIcon>
       <p>Kommer...</p>
     </div>
   );

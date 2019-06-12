@@ -1,6 +1,5 @@
-import { css } from '@emotion/core';
+import React from 'react';
 import styled from '@emotion/styled';
-import React, { useState } from 'react';
 import SafeLink from '../components/SafeLink';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
@@ -25,6 +24,11 @@ const StyledNavigation = styled.div`
   grid-template-columns: repeat(3, ${spacing.spacingUnit * 4}px [col-start]);
 `;
 
+const StyledPushElement = styled.div`
+  height: 1em;
+  padding: ${spacing.small} 0;
+`;
+
 const routes = [
   { to: '/', title: 'Praha 2019' },
   { to: '/schedule', title: 'Program' },
@@ -34,30 +38,28 @@ const routes = [
 const StyledSafeLink = styled(SafeLink)`
   justify-self: center;
   padding: ${spacing.small} 0;
-  ${p =>
-    p.isActive &&
-    css`
-      border-bottom: 3px solid ${colors.blue};
-      margin-bottom: -3px;
-    `};
 `;
 
 const Navigation = () => {
-  const [activeRoute, setActiveRoute] = useState('/');
   return (
-    <StyledNavigationContainer>
-      <StyledNavigation>
-        {routes.map(route => (
-          <StyledSafeLink
-            onClick={() => setActiveRoute(route.to)}
-            key={route.to}
-            to={route.to}
-            isActive={activeRoute === route.to}>
-            {route.title}
-          </StyledSafeLink>
-        ))}
-      </StyledNavigation>
-    </StyledNavigationContainer>
+    <>
+      <StyledNavigationContainer>
+        <StyledNavigation>
+          {routes.map(route => (
+            <StyledSafeLink
+              key={route.to}
+              to={route.to}
+              activeStyle={{
+                borderBottom: `3px solid ${colors.blue}`,
+                marginBottom: '-3px',
+              }}>
+              {route.title}
+            </StyledSafeLink>
+          ))}
+        </StyledNavigation>
+      </StyledNavigationContainer>
+      <StyledPushElement />
+    </>
   );
 };
 

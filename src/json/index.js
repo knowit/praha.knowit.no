@@ -54,6 +54,7 @@ const viewmodel = {
   },
   schedules: [
     {
+      date: '18',
       day: `Fredag ${eventData.startDate}`,
       collections: [
         {
@@ -67,6 +68,7 @@ const viewmodel = {
       ],
     },
     {
+      date: '19',
       day: 'Lørdag 19. Oktober',
       collections: [
         {
@@ -84,6 +86,7 @@ const viewmodel = {
       ],
     },
     {
+      date: '20',
       day: 'Søndag 20. Oktober',
       collections: [
         {
@@ -105,6 +108,7 @@ const viewmodel = {
       ],
     },
     {
+      date: '21',
       day: `Mandag ${eventData.endDate}`,
       collections: [
         {

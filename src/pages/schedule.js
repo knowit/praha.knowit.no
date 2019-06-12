@@ -10,6 +10,8 @@ import { oldColors as colors } from '../util/colors';
 import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
 import SafeLink from '../components/SafeLink';
+import DefaultLayout from '../layouts';
+import ContentSection from '../components/ContentSection';
 
 const buttonGroupStyle = css`
   margin: 2rem auto;
@@ -95,52 +97,45 @@ class SchedulePage extends React.Component {
       return <span>Her skjedde noe feil gitt...</span>;
     }
     return (
-      <Content backgroundColor={colors.greyLightest}>
-        <TopContent>
-          <StyledHeader>Program</StyledHeader>
-          <ButtonGroup css={buttonGroupStyle} numberOfButtons={1}>
-            <SafeLink to="/" css={linkStyle}>
-              Forside
-            </SafeLink>
-          </ButtonGroup>
-        </TopContent>
-
-        <ContentContainer backgroundColor={colors.greyLightest}>
-          <ButtonGroup numberOfButtons={viewmodel.schedules.length}>
-            {viewmodel.schedules.map((day, index) => (
-              <Button
-                key={day.day}
-                css={pickDayButtonsStyle}
-                arrowBottom
-                appearance={activeIndex === index ? 'active' : ''}
-                onClick={evt => this.onDayClick(evt, index)}>
-                {day.day}
-              </Button>
-            ))}
-          </ButtonGroup>
-          <StyledSelect onChange={this.onSelectChange}>
-            {viewmodel.schedules.map((day, index) => (
-              <option
-                key={day.day}
-                value={index}
-                onClick={evt => this.onDayClick(evt, index)}>
-                {day.day}
-              </option>
-            ))}
-          </StyledSelect>
-          {viewmodel.schedules.map((day, index) => (
-            <StyledDay id={index}>
-              <StyledDayHeader>{day.day}</StyledDayHeader>
-              {day.collections.map((collection, index) => (
-                <Slot
-                  key={`${collection.title}_${index}`}
-                  collection={collection}
-                />
+      <DefaultLayout>
+        <Content>
+          <ContentSection>
+            <ButtonGroup numberOfButtons={viewmodel.schedules.length}>
+              {viewmodel.schedules.map((day, index) => (
+                <SafeLink
+                  key={day.day}
+                  to={`/schedule/${day.date}`}
+                  css={pickDayButtonsStyle}>
+                  {day.day}
+                </SafeLink>
               ))}
-            </StyledDay>
-          ))}
-        </ContentContainer>
-      </Content>
+            </ButtonGroup>
+            <StyledSelect onChange={this.onSelectChange}>
+              {viewmodel.schedules.map((day, index) => (
+                <option
+                  key={day.day}
+                  value={index}
+                  onClick={evt => this.onDayClick(evt, index)}>
+                  {day.day}
+                </option>
+              ))}
+            </StyledSelect>
+          </ContentSection>
+          <ContentSection backgroundColor={colors.greyLightest}>
+            {viewmodel.schedules.map((day, index) => (
+              <StyledDay id={index}>
+                <StyledDayHeader>{day.day}</StyledDayHeader>
+                {day.collections.map((collection, index) => (
+                  <Slot
+                    key={`${collection.title}_${index}`}
+                    collection={collection}
+                  />
+                ))}
+              </StyledDay>
+            ))}
+          </ContentSection>
+        </Content>
+      </DefaultLayout>
     );
   }
 }

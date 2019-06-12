@@ -18,7 +18,6 @@ import TwoColumnInfo from '../components/Favorites';
 
 const StyledLogoContainer = styled.div`
   text-align: center;
-  margin-top: ${spacing.spacingUnit * 4}px;
 `;
 
 const IndexPage = () => (
@@ -40,17 +39,20 @@ const IndexPage = () => (
           Fagseminar {eventData.season.longCapitalized} {eventData.year}
         </h1>
         <Paragraph>
-          Knowit Objectnet arrangerer to fagseminarer årlig. Det er de ansatte
-          selv som lager programmet. Våren 2019 vil den bli avholdt 22. mars -
-          23. mars 2019 i Strømstad, Sverige.
+          {`Knowit Objectnet arrangerer to fagseminarer årlig. Det er de ansatte
+          selv som lager programmet. ${eventData.season.longCapitalized} ${
+            eventData.year
+          } vil den bli avholdt ${eventData.startDate} -
+          ${eventData.endDate} ${eventData.year} i ${eventData.cities}, ${
+            eventData.country
+          }.`}
         </Paragraph>
         <Paragraph>
-          Tidligere har vi besøkt Berlin, Istanbul, Madrid, Dublin, Svalbard,
-          Reykjavik, Palma, Ljubljana etc.
+          {`Tidligere har vi besøkt ${eventData.cities.join(', ')} etc.`}
         </Paragraph>
         <CodeOfConduct />
       </ContentSection>
-      <ContentSection withBottomSeperator withTopSeperator>
+      <ContentSection backgroundColor={colors.blueDark} color="white">
         <TwoColumnInfo />
       </ContentSection>
     </Content>

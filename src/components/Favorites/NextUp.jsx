@@ -1,19 +1,14 @@
 import React from 'react';
 import AccessTime from '@material-ui/icons/AccessTime';
-import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import spacing from '../../util/spacing';
 import colors from '../../util/colors';
-
-const StyledHeader = styled.h2`
-  display: flex;
-  align-items: center;
-`;
+import HeaderTwoWithIcon from '../HeaderTwoWithIcon';
 
 const NextUp = () => {
   return (
     <div>
-      <StyledHeader>
+      <HeaderTwoWithIcon>
         <AccessTime
           css={css`
             margin-right: ${spacing.small};
@@ -21,7 +16,7 @@ const NextUp = () => {
           `}
         />
         Det neste som skjer
-      </StyledHeader>
+      </HeaderTwoWithIcon>
       <p>Kommer...</p>
     </div>
   );
