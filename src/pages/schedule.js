@@ -5,7 +5,7 @@ import viewmodel from '../json';
 import ButtonGroup from '../components/ButtonGroup';
 import Button from '../components/Button';
 import Slot from '../components/Slot';
-import Content, { ContentContainer, TopContent } from '../components/Content';
+import Content from '../components/Content';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
@@ -91,9 +91,10 @@ class SchedulePage extends React.Component {
     const StyledSafeLink = StyledLink.withComponent(SafeLink);
     const { activeIndex } = this.state;
 
-    const activeDay = viewmodel.schedules.find(
+    const dayInUrl = viewmodel.schedules.find(
       scheduleDay => scheduleDay.date === window.location.hash.substring(1),
     );
+    const activeDay = dayInUrl || viewmodel.schedules[0];
     console.log(activeDay, window.location.hash.substring(0));
 
     if (!activeDay || !activeDay.day) {

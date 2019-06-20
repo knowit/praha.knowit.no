@@ -2,17 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import Content, { ContentContainer, TopContent } from '../Content';
+import Content from '../Content';
 import { oldColors as colors } from '../../util/colors';
 import spacing from '../../util/spacing';
-import ButtonGroup from '../ButtonGroup';
 import markdownStyle from './markdownStyle';
-import SafeLink from '../SafeLink';
-
-const buttonGroupStyle = css`
-  margin: 2rem auto;
-`;
+import ContentSection from '../ContentSection';
+import DefaultLayout from '../../layouts';
 
 const StyledMarkdownContainer = styled.div`
   background-color: white;
@@ -27,21 +22,16 @@ const VillageMarkdown = ({
   const { markdownRemark } = data; // data.markdownRemark holds our post data
   const { html } = markdownRemark;
   return (
-    <Content backgroundColor={colors.greyLightest}>
-      <TopContent backgroundColor={colors.knowit.green}>
-        <ButtonGroup css={buttonGroupStyle} numberOfButtons={1}>
-          <SafeLink hoverColor={colors.knowit.green} to="/schedule/">
-            Program
-          </SafeLink>
-        </ButtonGroup>
-      </TopContent>
-      <ContentContainer>
-        <StyledMarkdownContainer
-          css={markdownStyle}
-          dangerouslySetInnerHTML={{ __html: html }}
-        />
-      </ContentContainer>
-    </Content>
+    <DefaultLayout>
+      <Content backgroundColor={colors.greyLightest}>
+        <ContentSection>
+          <StyledMarkdownContainer
+            css={markdownStyle}
+            dangerouslySetInnerHTML={{ __html: html }}
+          />
+        </ContentSection>
+      </Content>
+    </DefaultLayout>
   );
 };
 

@@ -22,8 +22,6 @@ const StyledSlot = styled.div`
 
 const StyledSlotTime = styled.span`
   align-self: center;
-  width: 10%;
-  margin-left: ${spacing.normal};
   @media (${mediaQueries.medium}) {
     align-self: center;
     width: 100%;
@@ -42,12 +40,50 @@ const StyledSlotContent = styled.div`
   }
 `;
 
+const typeColors = {
+  other: colors.green,
+  talk: colors.blueDarkest,
+  workshop: colors.blue,
+};
+
 const StyledSlotType = styled.div`
-  background-color: ${colors.green};
+  background-color: ${p => (p.type ? typeColors[p.type] : typeColors.other)};
   width: ${spacing.small};
-  border: 1px solid ${colors.green};
+  border: 1px solid ${p => (p.type ? typeColors[p.type] : typeColors.other)};
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
 `;
 
-export { StyledSlot, StyledSlotTime, StyledSlotContent, StyledSlotType };
+const StyledSlotTimeContainer = styled.span`
+  width: 10%;
+  margin-left: ${spacing.normal};
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin-right: ${spacing.normal};
+`;
+
+const StyledSlotDuration = styled.span`
+  margin-top: ${spacing.small};
+  color: ${colors.grey};
+`;
+
+const StyledSlotTitle = styled.strong`
+  display: inline-block;
+  padding: ${spacing.normal} 0;
+`;
+
+const StyledSlotDescription = styled.span`
+  display: inline-block;
+`;
+
+export {
+  StyledSlot,
+  StyledSlotTitle,
+  StyledSlotDescription,
+  StyledSlotTime,
+  StyledSlotContent,
+  StyledSlotType,
+  StyledSlotDuration,
+  StyledSlotTimeContainer,
+};

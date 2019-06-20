@@ -20,14 +20,15 @@ const strippedStyle = css`
   background-color: transparent;
   outline: none;
   border: none;
-  display: block;
+  display: inline-block;
   box-shadow: none;
 `;
 
 const appearances = {
   stripped: css`
-    ${strippedStyle} &:hover,
-        &:focus {
+    ${strippedStyle};
+    &:hover,
+    &:focus {
       ${strippedStyle};
     }
   `,
@@ -44,24 +45,6 @@ const appearances = {
   `,
   active: hoverStyle,
 };
-
-const arrowBottomCss = css`
-  position: relative;
-  &:after {
-    top: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: ' ';
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-top-color: ${darken(0.1, colors.blue)};
-    border-width: 15px;
-    margin-left: -15px;
-  }
-`;
-
 export const StyledButton = styled.button`
   padding: 0.8rem 3rem;
   background-color: ${colors.blue};
@@ -70,12 +53,11 @@ export const StyledButton = styled.button`
   font-size: 1.2rem;
   font-weight: 100;
   border-radius: 30px;
-  ${p => p.appearance === 'active' && p.arrowBottom && arrowBottomCss}
   &:hover,
   &:focus {
     ${hoverStyle};
   }
-  ${p => appearances[p.appearance]};
+  ${p => p.appearance && appearances[p.appearance]};
 }
 `;
 

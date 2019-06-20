@@ -1,30 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from '@emotion/styled';
 import {
   StyledSlot,
   StyledSlotTime,
+  StyledSlotTitle,
   StyledSlotContent,
   StyledSlotType,
+  StyledSlotTimeContainer,
 } from './SlotStyles';
-import Villages from '../Villages/Villages';
 
-const StyledSpan = styled.span`
-  padding: 2rem;
-  display: inline-block;
-`;
-
-const OtherSlot = ({ collection }) => {
-  return (
-    <StyledSlot>
-      <StyledSlotType type="other" />
+const OtherSlot = ({ collection }) => (
+  <StyledSlot>
+    <StyledSlotType type="other" />
+    <StyledSlotTimeContainer>
       <StyledSlotTime>{collection.time}</StyledSlotTime>
-      <StyledSlotContent>
-        <StyledSpan>{collection.title}</StyledSpan>
-      </StyledSlotContent>
-    </StyledSlot>
-  );
-};
+    </StyledSlotTimeContainer>
+    <StyledSlotContent>
+      <StyledSlotTitle>{collection.title}</StyledSlotTitle>
+    </StyledSlotContent>
+  </StyledSlot>
+);
 
 OtherSlot.propTypes = {
   collection: PropTypes.object,
