@@ -4,7 +4,6 @@ import EntriesSlot from './EntriesSlot';
 import OtherSlot from './OtherSlot';
 
 const Slot = ({ collection }) => {
-  console.log(collection);
   if (!collection) {
     return null;
   } else if (collection.type === 'talk') {

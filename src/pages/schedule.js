@@ -88,14 +88,12 @@ class SchedulePage extends React.Component {
   }
 
   render() {
+    const { location } = this.props;
     const StyledSafeLink = StyledLink.withComponent(SafeLink);
-    const { activeIndex } = this.state;
-
     const dayInUrl = viewmodel.schedules.find(
-      scheduleDay => scheduleDay.date === window.location.hash.substring(1),
+      scheduleDay => scheduleDay.date === location.hash.substring(1),
     );
     const activeDay = dayInUrl || viewmodel.schedules[0];
-    console.log(activeDay, window.location.hash.substring(0));
 
     if (!activeDay || !activeDay.day) {
       return <span>Her skjedde noe feil gitt...</span>;
