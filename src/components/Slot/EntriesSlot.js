@@ -56,7 +56,6 @@ const EntriesSlot = ({ collection }) => {
     },
     [collection.description],
   );
-  console.log(maxLength);
   return (
     <StyledSlot>
       <StyledSlotType type="talk" />

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Seperator from './Seperator';
 import styled from '@emotion/styled';
 import colors from '../util/colors';
+import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
 
 const StyledSection = styled.div`
@@ -18,7 +19,7 @@ const StyledInnerSection = styled.div`
   }
 
   @media (${mediaQueries.medium}) {
-    padding: 0;
+    padding: 0 ${spacing.small};
   }
 `;
 

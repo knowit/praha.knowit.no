@@ -43,7 +43,7 @@ const IndexPage = () => (
           selv som lager programmet. ${eventData.season.longCapitalized} ${
             eventData.year
           } vil den bli avholdt ${eventData.startDate} -
-          ${eventData.endDate} ${eventData.year} i ${eventData.cities}, ${
+          ${eventData.endDate} ${eventData.year} i ${eventData.city}, ${
             eventData.country
           }.`}
         </Paragraph>

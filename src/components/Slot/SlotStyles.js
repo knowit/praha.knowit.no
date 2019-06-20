@@ -16,12 +16,11 @@ const StyledSlot = styled.div`
   }
 
   @media (${mediaQueries.medium}) {
-    flex-flow: column;
+    margin: ${spacing.small};
   }
 `;
 
 const StyledSlotTime = styled.span`
-  align-self: center;
   @media (${mediaQueries.medium}) {
     align-self: center;
     width: 100%;

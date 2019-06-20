@@ -28,6 +28,9 @@ const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  @media (${mediaQueries.medium}) {
+    display: none;
+  }
 `;
 
 const StyledLink = styled.a`
@@ -51,9 +54,10 @@ const StyledLink = styled.a`
 const StyledSelect = styled.select`
   border-radius: 0;
   height: 4rem;
-  width: 100%;
+  width: 90%;
   background-color: white;
   margin: 0 auto;
+  margin-bottom: ${spacing.small};
   display: none;
 
   @media (${mediaQueries.medium}) {
@@ -84,7 +88,12 @@ class SchedulePage extends React.Component {
   }
 
   onSelectChange(evt) {
-    this.setState({ activeIndex: evt.target.value });
+    const scheduleDay = viewmodel.schedules[evt.target.value];
+    window.location.hash = `#${
+      viewmodel.schedules[evt.target.value]
+        ? scheduleDay.date
+        : viewmodel.schedules[0].date
+    }`;
   }
 
   render() {
