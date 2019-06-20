@@ -101,20 +101,10 @@ const viewmodel = {
           start: '09:00',
           end: '13:00',
           room: 'Orion',
-          title: 'Velkommen til fagseminar (... og kort internmøte)!',
-          description:
-            'Jan Henrik ønskehrialvår 2019, før hver village får et minutt hver til å reklamere for seg selv.',
+          title: 'Jan Henrik prater',
+          description: 'Jan Henrik prater...',
           speakers: [],
           type: 'talk',
-        },
-        {
-          start: '09:00',
-          end: '13:00',
-          room: 'Orion',
-          title: 'Mobilitet og smarte byer!',
-          type: 'talk',
-          description:
-            'Erik N forteller om et av våre satsningsområder: Mobilitet! Hva ligger i mobilitet? Hvorfor skal vi drive med det? Og hva er smarte byer?',
         },
         {
           time: '13:00-18:00',
