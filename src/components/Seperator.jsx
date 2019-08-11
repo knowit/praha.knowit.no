@@ -4,6 +4,8 @@ import styled from '@emotion/styled';
 
 const StyledSvg = styled.svg`
   display: block;
+  margin-bottom: -1px;
+  margin-top: -1px;
 `;
 
 const SectionSeparator = ({
@@ -19,7 +21,7 @@ const SectionSeparator = ({
         viewBox="0 0 1024 76"
         version="1.1"
         xmlns="http://www.w3.org/2000/svg">
-        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
           <g transform="translate(0.000000, -1005.000000)">
             <g transform="translate(512.000000, 1043.000000) rotate(-180.000000) translate(-512.000000, -1043.000000) translate(0.000000, 1005.000000)">
               <polygon
@@ -47,7 +49,7 @@ const SectionSeparator = ({
       viewBox="0 0 1024 84"
       version="1.1"
       xmlns="http://www.w3.org/2000/svg">
-      <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
         <g transform="translate(0.000000, -465.000000)">
           <g transform="translate(0.000000, 465.000000)">
             <polygon

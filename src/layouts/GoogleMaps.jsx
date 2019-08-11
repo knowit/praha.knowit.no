@@ -20,7 +20,7 @@ const StyledGoogleMapsBlocker = styled.div`
 
 const StyleGoogleMapsContent = styled.div`
   width: 350px;
-  height: 180px;
+  height: 200px;
   padding: 20px;
   top: 0.5rem;
   left: 0.5rem;

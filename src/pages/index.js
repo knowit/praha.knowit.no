@@ -9,9 +9,14 @@ import colors from '../util/colors';
 import ContentSection from '../components/ContentSection';
 import PrahaLogo from '../components/Icons/PrahaLogo';
 import TwoColumnInfo from '../components/Favorites';
+import spacing from '../util/spacing';
+import mediaQueries from '../util/mediaQueries';
 
 const StyledLogoContainer = styled.div`
   text-align: center;
+  @media (${mediaQueries.medium}) {
+    margin-top: ${spacing.normal};
+  }
 `;
 
 const IndexPage = () => (
