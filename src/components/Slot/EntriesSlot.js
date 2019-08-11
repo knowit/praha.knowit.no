@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-
+import AddFavorite from '../Favorites/AddFavorite';
 import {
   StyledSlot,
   StyledSlotTime,
@@ -119,6 +119,7 @@ const EntriesSlot = ({ collection }) => {
           </div>
         )}
       </StyledSlotContent>
+      <AddFavorite />
     </StyledSlot>
   );
 };
