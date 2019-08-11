@@ -25,15 +25,16 @@ const StyledSlotTime = styled.span`
     align-self: center;
     width: 100%;
     text-align: center;
-    margin-bottom: 1rem;
   }
 `;
 
 const StyledSlotContent = styled.div`
   padding: 1rem 0;
   width: 90%;
+  padding: ${spacing.large} 0;
   @media (${mediaQueries.medium}) {
     padding: 1rem 0;
+    width: 70%;
     font-weight: bold;
     width: 100%;
   }
@@ -60,6 +61,9 @@ const StyledSlotTimeContainer = styled.span`
   flex-flow: column;
   justify-content: center;
   margin-right: ${spacing.normal};
+  @media (${mediaQueries.medium}) {
+    width: 30%;
+  }
 `;
 
 const StyledSlotDuration = styled.span`
@@ -69,11 +73,10 @@ const StyledSlotDuration = styled.span`
 
 const StyledSlotTitle = styled.strong`
   display: inline-block;
-  padding: ${spacing.normal} 0;
 `;
 
-const StyledSlotDescription = styled.span`
-  display: inline-block;
+const StyledSlotDescription = styled.div`
+  margin-top: 10px;
 `;
 
 export {

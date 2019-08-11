@@ -28,8 +28,8 @@ const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  white-space: nowrap;
   @media (${mediaQueries.medium}) {
-    display: none;
   }
 `;
 
@@ -47,21 +47,6 @@ const StyledLink = styled.a`
     ${isActiveStyle};
   }
   @media (${mediaQueries.medium}) {
-    display: none;
-  }
-`;
-
-const StyledSelect = styled.select`
-  border-radius: 0;
-  height: 4rem;
-  width: 90%;
-  background-color: white;
-  margin: 0 auto;
-  margin-bottom: ${spacing.small};
-  display: none;
-
-  @media (${mediaQueries.medium}) {
-    display: block;
   }
 `;
 
@@ -116,9 +101,10 @@ class SchedulePage extends React.Component {
             color="white">
             <ButtonGroup
               css={buttonGroupStyle}
+              overflow="scroll"
               numberOfButtons={viewmodel.schedules.length}>
               {viewmodel.schedules.map((day, index) => (
-                <StyledLinkContainer>
+                <StyledLinkContainer id={day.date}>
                   <StyledSafeLink
                     key={day.day}
                     isActive={activeDay.date === day.date}
@@ -131,16 +117,6 @@ class SchedulePage extends React.Component {
                 </StyledLinkContainer>
               ))}
             </ButtonGroup>
-            <StyledSelect onChange={this.onSelectChange}>
-              {viewmodel.schedules.map((day, index) => (
-                <option
-                  key={day.day}
-                  value={index}
-                  onClick={evt => this.onDayClick(evt, index)}>
-                  {day.day}
-                </option>
-              ))}
-            </StyledSelect>
           </ContentSection>
           <ContentSection withTopSeperator withBottomSeperator>
             {activeDay.collections.map((collection, index) => (

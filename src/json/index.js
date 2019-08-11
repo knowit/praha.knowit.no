@@ -102,7 +102,8 @@ const viewmodel = {
           end: '13:00',
           room: 'Orion',
           title: 'Jan Henrik prater',
-          description: 'Jan Henrik prater...',
+          description:
+            'Jan Henrik pratjdjdjdjd pratjdjdjdjdprat  pratjdjdjdjd pra pratjdjdjdjd pratjdjdjdjd pratjdjdjdjd pratjdjdjdjdtjdjdjdjd pratjdjdjdjd pratjdjdjdjdjdjdjd jdp atjdjdjdjdmj dj jd jd jdjdjjjdjer...',
           speakers: [],
           type: 'talk',
         },

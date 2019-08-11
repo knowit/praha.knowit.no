@@ -56,6 +56,7 @@ const EntriesSlot = ({ collection }) => {
     },
     [collection.description],
   );
+  console.log(maxLength);
   return (
     <StyledSlot>
       <StyledSlotType type="talk" />
@@ -72,13 +73,15 @@ const EntriesSlot = ({ collection }) => {
           css={maxLength && !showDescription && maxLengthStyle(maxLength)}>
           {collection.description}
         </StyledSlotDescription>
-        <Button
-          appearance="stripped"
-          onClick={() => setShowDescription(!showDescription)}>
-          <ExpandMore
-            css={showDescription ? expandMoreStyle(180) : expandMoreStyle(0)}
-          />
-        </Button>
+        {maxLength && (
+          <Button
+            appearance="stripped"
+            onClick={() => setShowDescription(!showDescription)}>
+            <ExpandMore
+              css={showDescription ? expandMoreStyle(180) : expandMoreStyle(0)}
+            />
+          </Button>
+        )}
       </StyledSlotContent>
     </StyledSlot>
   );

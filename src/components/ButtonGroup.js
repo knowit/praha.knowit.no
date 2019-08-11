@@ -7,6 +7,7 @@ const StyledButtonGroup = styled.div`
   grid-template-columns: ${p =>
     `repeat(${p.numberOfButtons}, auto [col-start])`};
   grid-column-gap: 10px;
+  ${p => (p.overflow ? `overflow: ${p.overflow}` : '')};
 `;
 
 const ButtonGroup = ({ children, ...rest }) => {
