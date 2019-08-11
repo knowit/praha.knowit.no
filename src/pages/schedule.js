@@ -3,65 +3,55 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import viewmodel from '../json';
 import ButtonGroup from '../components/ButtonGroup';
-import Button from '../components/Button';
 import Slot from '../components/Slot';
-import Content, { ContentContainer, TopContent } from '../components/Content';
+import Content from '../components/Content';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
 import SafeLink from '../components/SafeLink';
+import DefaultLayout from '../layouts';
+import ContentSection from '../components/ContentSection';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 
 const buttonGroupStyle = css`
-  margin: 2rem auto;
+  margin: ${spacing.large} auto;
 `;
 
-const pickDayButtonsStyle = css`
+const isActiveStyle = css`
+  color: white;
+  background-color: ${colors.blueDarkest};
+  border-color: ${colors.blueDarkest};
+`;
+
+const StyledLinkContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  white-space: nowrap;
   @media (${mediaQueries.medium}) {
-    display: none;
   }
 `;
 
-const StyledSelect = styled.select`
-  border-radius: 0;
-  height: 4rem;
-  width: 100%;
-  background-color: white;
-  margin: 0 auto;
-  display: none;
-
-  @media (${mediaQueries.medium}) {
-    display: block;
-  }
-`;
-
-const StyledHeader = styled.h1`
-  margin: 0 auto;
-`;
-
-const linkStyle = css`
-  padding: 0.8rem 3rem;
-  background-color: ${colors.primary};
+const StyledLink = styled.a`
+  padding: ${spacing.small} ${spacing.normal};
+  background-color: ${colors.blue};
   text-decoration: none;
   color: white;
-  font-size: 1.2rem;
-  border: 2px solid white;
-
+  border: 1px solid ${colors.blue};
+  border-radius: 50px;
+  text-align: center;
+  ${p => p.isActive && isActiveStyle};
   &:hover,
   &:focus {
-    color: ${colors.primary};
-    background-color: white;
+    ${isActiveStyle};
+  }
+  @media (${mediaQueries.medium}) {
   }
 `;
 
-const StyledDay = styled.div`
-  border: 1px solid ${colors.greyLight};
-  padding: 0 ${spacing.small};
-  margin: ${spacing.large} 0;
-`;
-
-const StyledDayHeader = styled.h1`
-  text-align: center;
-  margin: ${spacing.large} 0;
+const expandMoreStyle = css`
+  margin-top: ${spacing.xsmall};
+  color: ${colors.blue};
 `;
 
 class SchedulePage extends React.Component {
@@ -82,65 +72,61 @@ class SchedulePage extends React.Component {
   }
 
   onSelectChange(evt) {
-    this.setState({ activeIndex: evt.target.value });
+    const scheduleDay = viewmodel.schedules[evt.target.value];
+    window.location.hash = `#${
+      viewmodel.schedules[evt.target.value]
+        ? scheduleDay.date
+        : viewmodel.schedules[0].date
+    }`;
   }
 
   render() {
-    const { activeIndex } = this.state;
-    const activeDay =
-      viewmodel && viewmodel.schedules[activeIndex]
-        ? viewmodel.schedules[activeIndex]
-        : undefined;
+    const { location } = this.props;
+    const StyledSafeLink = StyledLink.withComponent(SafeLink);
+    const dayInUrl = viewmodel.schedules.find(
+      scheduleDay => scheduleDay.date === location.hash.substring(1),
+    );
+    const activeDay = dayInUrl || viewmodel.schedules[0];
+
     if (!activeDay || !activeDay.day) {
       return <span>Her skjedde noe feil gitt...</span>;
     }
     return (
-      <Content backgroundColor={colors.greyLightest}>
-        <TopContent>
-          <StyledHeader>Program</StyledHeader>
-          <ButtonGroup css={buttonGroupStyle} numberOfButtons={1}>
-            <SafeLink to="/" css={linkStyle}>
-              Forside
-            </SafeLink>
-          </ButtonGroup>
-        </TopContent>
-
-        <ContentContainer backgroundColor={colors.greyLightest}>
-          <ButtonGroup numberOfButtons={viewmodel.schedules.length}>
-            {viewmodel.schedules.map((day, index) => (
-              <Button
-                key={day.day}
-                css={pickDayButtonsStyle}
-                arrowBottom
-                appearance={activeIndex === index ? 'active' : ''}
-                onClick={evt => this.onDayClick(evt, index)}>
-                {day.day}
-              </Button>
-            ))}
-          </ButtonGroup>
-          <StyledSelect onChange={this.onSelectChange}>
-            {viewmodel.schedules.map((day, index) => (
-              <option
-                key={day.day}
-                value={index}
-                onClick={evt => this.onDayClick(evt, index)}>
-                {day.day}
-              </option>
-            ))}
-          </StyledSelect>
-          {viewmodel.schedules.map((day, index) => (
-            <StyledDay id={index}>
-              <StyledDayHeader>{day.day}</StyledDayHeader>
-              {day.collections.map((collection, index) => (
-                <Slot
-                  key={`${collection.title}_${index}`}
-                  collection={collection}
-                />
+      <DefaultLayout>
+        <Content>
+          <ContentSection
+            minHeight="10vh"
+            backgroundColor={colors.blueDark}
+            color="white">
+            <ButtonGroup
+              css={buttonGroupStyle}
+              overflow="scroll"
+              numberOfButtons={viewmodel.schedules.length}>
+              {viewmodel.schedules.map((day, index) => (
+                <StyledLinkContainer id={day.date}>
+                  <StyledSafeLink
+                    key={day.day}
+                    isActive={activeDay.date === day.date}
+                    to={`/schedule#${day.date}`}>
+                    {day.day}
+                  </StyledSafeLink>
+                  {activeDay.date === day.date && (
+                    <ExpandMore css={expandMoreStyle} fontSize="large" />
+                  )}
+                </StyledLinkContainer>
               ))}
-            </StyledDay>
-          ))}
-        </ContentContainer>
-      </Content>
+            </ButtonGroup>
+          </ContentSection>
+          <ContentSection withTopSeperator withBottomSeperator>
+            {activeDay.collections.map((collection, index) => (
+              <Slot
+                key={`${collection.title}_${index}`}
+                collection={collection}
+              />
+            ))}
+          </ContentSection>
+        </Content>
+      </DefaultLayout>
     );
   }
 }

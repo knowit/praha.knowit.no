@@ -2,20 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Link from 'gatsby-link';
 import { css } from '@emotion/core';
-import colors from '../util/colors';
+import { oldColors } from '../util/colors';
 
-const linkStyle = (hoverColor = colors.primary) => css`
-  padding: 0.8rem 3rem;
+const linkStyle = (hoverColor = oldColors.primary) => css`
   background-color: transparent;
   text-decoration: none;
   color: white;
-  font-size: 1.2rem;
-  border: 2px solid white;
 
   &:hover,
   &:focus {
-    color: ${hoverColor};
-    background-color: white;
+    color: white;
   }
 `;
 

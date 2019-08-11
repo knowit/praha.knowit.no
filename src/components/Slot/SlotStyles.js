@@ -1,62 +1,91 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import colors from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 import spacing from '../../util/spacing';
 
-const slotTitleStyles = {
-  grey: css`
-    text-align: center;
-    color: black;
-    background-color: ${colors.greyLight};
-    border: 1px solid ${colors.greyLight};
-  `,
-  white: css`
-    border: 1px solid ${colors.greyLight};
-    background-color: white;
-    color: black;
-    @media (${mediaQueries.medium}) {
-      border-left: none;
-      border-right: none;
-    }
-  `,
-};
-
 const StyledSlot = styled.div`
   margin-top: 1rem;
   display: flex;
+  background-color: white;
   flex-flow: row;
+  border-radius: 5px;
 
   &:last-child {
     margin-bottom: ${spacing.large};
   }
 
   @media (${mediaQueries.medium}) {
-    flex-flow: column;
+    margin: ${spacing.small};
   }
 `;
 
 const StyledSlotTime = styled.span`
-  align-self: center;
-  width: 10%;
-
   @media (${mediaQueries.medium}) {
     align-self: center;
     width: 100%;
     text-align: center;
-    margin-bottom: 1rem;
   }
 `;
 
-const StyledSlotTitle = styled.div`
+const StyledSlotContent = styled.div`
   padding: 1rem 0;
   width: 90%;
+  padding: ${spacing.large} 0;
   @media (${mediaQueries.medium}) {
     padding: 1rem 0;
+    width: 70%;
     font-weight: bold;
     width: 100%;
   }
-  ${p => (p.background ? slotTitleStyles[p.background] : '')};
 `;
 
-export { StyledSlot, StyledSlotTime, StyledSlotTitle };
+const typeColors = {
+  other: colors.green,
+  talk: colors.blueDarkest,
+  workshop: colors.blue,
+};
+
+const StyledSlotType = styled.div`
+  background-color: ${p => (p.type ? typeColors[p.type] : typeColors.other)};
+  width: ${spacing.small};
+  border: 1px solid ${p => (p.type ? typeColors[p.type] : typeColors.other)};
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+`;
+
+const StyledSlotTimeContainer = styled.span`
+  width: 10%;
+  margin-left: ${spacing.normal};
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  margin-right: ${spacing.normal};
+  @media (${mediaQueries.medium}) {
+    width: 30%;
+    margin-left: ${spacing.small};
+  }
+`;
+
+const StyledSlotDuration = styled.span`
+  margin-top: ${spacing.small};
+  color: ${colors.grey};
+`;
+
+const StyledSlotTitle = styled.strong`
+  display: inline-block;
+`;
+
+const StyledSlotDescription = styled.div`
+  margin-top: 10px;
+`;
+
+export {
+  StyledSlot,
+  StyledSlotTitle,
+  StyledSlotDescription,
+  StyledSlotTime,
+  StyledSlotContent,
+  StyledSlotType,
+  StyledSlotDuration,
+  StyledSlotTimeContainer,
+};

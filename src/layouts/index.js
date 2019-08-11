@@ -2,8 +2,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import viewmodel from '../json';
 import GoogleMaps from './GoogleMaps';
+import Navigation from './Navigation';
 
-const DefaultLayout = ({ children }) => {
+const DefaultLayout = ({ children, showGoogleMaps }) => {
   return (
     <div>
       <Helmet
@@ -20,8 +21,9 @@ const DefaultLayout = ({ children }) => {
           rel="stylesheet"
         />
       </Helmet>
+      <Navigation />
       {children}
-      <GoogleMaps />
+      {showGoogleMaps && <GoogleMaps />}
     </div>
   );
 };

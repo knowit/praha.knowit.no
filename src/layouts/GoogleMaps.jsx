@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import viewmodel from '../json';
-import colors from '../util/colors';
+import { oldColors as colors } from '../util/colors';
 import mediaQueries from '../util/mediaQueries';
 
 const StyledGoogleMapsWrapper = styled.div`
@@ -20,7 +20,7 @@ const StyledGoogleMapsBlocker = styled.div`
 
 const StyleGoogleMapsContent = styled.div`
   width: 350px;
-  height: 180px;
+  height: 200px;
   padding: 20px;
   top: 0.5rem;
   left: 0.5rem;
