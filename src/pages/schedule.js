@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import viewmodel from '../json';
 import ButtonGroup from '../components/ButtonGroup';
-import Button from '../components/Button';
 import Slot from '../components/Slot';
 import Content from '../components/Content';
 import colors from '../util/colors';

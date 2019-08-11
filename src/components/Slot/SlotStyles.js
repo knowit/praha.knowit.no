@@ -1,5 +1,4 @@
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
 import colors from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 import spacing from '../../util/spacing';
@@ -63,6 +62,7 @@ const StyledSlotTimeContainer = styled.span`
   margin-right: ${spacing.normal};
   @media (${mediaQueries.medium}) {
     width: 30%;
+    margin-left: ${spacing.small};
   }
 `;
 

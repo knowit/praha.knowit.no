@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 import colors from '../../util/colors';
 import spacing from '../../util/spacing';

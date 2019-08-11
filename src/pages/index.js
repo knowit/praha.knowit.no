@@ -1,17 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
-import { css } from '@emotion/core';
-import { withPrefix } from 'gatsby-link';
-import ArrowDropDown from '@material-ui/icons/ArrowDropDown';
-import viewmodel, { eventData } from '../json';
+import { eventData } from '../json';
 import Content from '../components/Content';
 import Paragraph from '../components/Paragraph';
-import ButtonGroup from '../components/ButtonGroup';
 import CodeOfConduct from '../components/CodeOfConduct';
 import Layout from '../layouts';
 import colors from '../util/colors';
-import spacing from '../util/spacing';
-import SafeLink from '../components/SafeLink';
 import ContentSection from '../components/ContentSection';
 import PrahaLogo from '../components/Icons/PrahaLogo';
 import TwoColumnInfo from '../components/Favorites';

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import ExpandLess from '@material-ui/icons/ExpandLess';
 
 import {
   StyledSlot,
@@ -22,6 +21,7 @@ const maxLengthStyle = maxLength => css`
   overflow: hidden;
   position: relative;
   white-space: nowrap;
+  display: inline-block;
   &:before {
     content: '';
     position: absolute;
@@ -42,6 +42,21 @@ const expandMoreStyle = rotation => css`
   transition: transform 1s ease-in-out;
 `;
 
+const ShowButton = ({ showDescription, setShowDescription }) => (
+  <Button
+    appearance="stripped"
+    onClick={() => setShowDescription(!showDescription)}>
+    <ExpandMore
+      css={showDescription ? expandMoreStyle(180) : expandMoreStyle(0)}
+    />
+  </Button>
+);
+
+ShowButton.propTypes = {
+  showDescription: PropTypes.bool.isRequired,
+  setShowDescription: PropTypes.func.isRequired,
+};
+
 const EntriesSlot = ({ collection }) => {
   const descriptionRef = React.createRef();
   const [maxLength, setMaxLength] = useState(undefined);
@@ -56,7 +71,6 @@ const EntriesSlot = ({ collection }) => {
     },
     [collection.description],
   );
-  console.log(maxLength);
   return (
     <StyledSlot>
       <StyledSlotType type="talk" />
@@ -68,19 +82,41 @@ const EntriesSlot = ({ collection }) => {
       </StyledSlotTimeContainer>
       <StyledSlotContent>
         <StyledSlotTitle>{collection.title}</StyledSlotTitle>
-        <StyledSlotDescription
-          ref={descriptionRef}
-          css={maxLength && !showDescription && maxLengthStyle(maxLength)}>
-          {collection.description}
+        <StyledSlotDescription ref={descriptionRef}>
+          <div
+            css={
+              maxLength && !showDescription
+                ? maxLengthStyle(maxLength)
+                : css`
+                    display: inline-block;
+                  `
+            }>
+            {collection.description}
+            {maxLength &&
+              showDescription && (
+                <ShowButton
+                  showDescription={showDescription}
+                  setShowDescription={setShowDescription}
+                />
+              )}
+          </div>
+          {maxLength &&
+            !showDescription && (
+              <ShowButton
+                showDescription={showDescription}
+                setShowDescription={setShowDescription}
+              />
+            )}
         </StyledSlotDescription>
-        {maxLength && (
-          <Button
-            appearance="stripped"
-            onClick={() => setShowDescription(!showDescription)}>
-            <ExpandMore
-              css={showDescription ? expandMoreStyle(180) : expandMoreStyle(0)}
-            />
-          </Button>
+        {collection.speakers.length > 0 && (
+          <div
+            css={css`
+              margin-top: ${spacing.small};
+            `}>
+            {collection.speakers.map(speaker => (
+              <span key={speaker}>{`${speaker} `}</span>
+            ))}
+          </div>
         )}
       </StyledSlotContent>
     </StyledSlot>

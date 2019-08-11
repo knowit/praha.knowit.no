@@ -7,13 +7,8 @@ import ContentSection from '../components/ContentSection';
 import HeaderTwoWithIcon from '../components/HeaderTwoWithIcon';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
-/*
-        {Object.keys(viewmodel.talks).map(key => (
-          <Speakers key={key} talk={viewmodel.talks[key]} talkKey={key} />
-        ))}
-*/
 
-const SpeakersPage = () => {
+const Favoritesage = () => {
   return (
     <Layout>
       <Content>
@@ -34,4 +29,4 @@ const SpeakersPage = () => {
   );
 };
 
-export default SpeakersPage;
+export default Favoritesage;
