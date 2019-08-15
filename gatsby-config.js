@@ -13,6 +13,16 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    {
+      resolve: 'gatsby-source-airtable',
+      options: {
+        apiKey: 'YOUR_API_KEY',
+        baseId: 'YOUR_BASE_ID',
+        tableName: 'CMS',
+        tableView: 'published',
+        queryName: ''
+      }
+    },
   ],
   pathPrefix: '/',
 };

@@ -16,6 +16,7 @@
     "gatsby-plugin-emotion": "^4.0.1",
     "gatsby-plugin-postcss": "^2.0.3",
     "gatsby-plugin-react-helmet": "^3.0.5",
+    "gatsby-source-airtable": "^2.0.8",
     "gatsby-source-filesystem": "^2.0.20",
     "gatsby-transformer-remark": "^2.2.3",
     "gh-pages": "^2.0.1",
@@ -25,7 +26,9 @@
     "react-dom": "^16.8.0",
     "react-emotion": "^10.0.0",
     "react-helmet": "^5.2.0",
-    "react-spring": "^8.0.23"
+    "react-spring": "^8.0.23",
+    "remark-html": "^10.0.0",
+    "unified": "^8.3.2"
   },
   "keywords": [
     "gatsby"
