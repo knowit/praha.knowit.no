@@ -1,4 +1,4 @@
-import secrets from './secrets';
+const secrets = require('./secrets');
 
 module.exports = {
   siteMetadata: {
@@ -20,8 +20,8 @@ module.exports = {
       options: {
         apiKey: secrets.AIRTABLE.API_SECRET,
         baseId: secrets.AIRTABLE.BASE_ID,
-        tableName: 'CMS',
-        tableView: 'published',
+        tableName: secrets.AIRTABLE.TABLE_NAME,
+        tableView: secrets.AIRTABLE.TABLE_VIEW,
         queryName: ''
       }
     },
