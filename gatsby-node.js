@@ -22,11 +22,13 @@ exports.createPages = ({ actions, graphql }) => {
       return Promise.reject(result.errors);
     }
 
-    result.data.allMarkdownRemark.edges.forEach(({ node }) => {
+    result.data.allAirtable.edges.forEach(edge => {
       createPage({
-        path: node.frontmatter.path,
-        component: villageMarkdownComponent,
-        context: {}, // additional data can be passed via context
+        path: `${edge.node.slug}`,
+        component: slash(blogPostTemplate),
+        context: {
+          slug: edge.node.slug
+        }
       });
     });
   });
