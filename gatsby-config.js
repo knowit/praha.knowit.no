@@ -1,3 +1,5 @@
+import secrets from './secrets';
+
 module.exports = {
   siteMetadata: {
     title: 'Knowit Praha 2019',
@@ -16,8 +18,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-airtable',
       options: {
-        apiKey: 'YOUR_API_KEY',
-        baseId: 'YOUR_BASE_ID',
+        apiKey: secrets.AIRTABLE.API_SECRET,
+        baseId: secrets.AIRTABLE.BASE_ID,
         tableName: 'CMS',
         tableView: 'published',
         queryName: ''
