@@ -19,11 +19,13 @@ module.exports = {
       resolve: 'gatsby-source-airtable',
       options: {
         apiKey: secrets.AIRTABLE.API_SECRET,
-        baseId: secrets.AIRTABLE.BASE_ID,
-        tableName: secrets.AIRTABLE.TABLE_NAME,
-        tableView: secrets.AIRTABLE.TABLE_VIEW,
-        queryName: ''
-      }
+        tables: [
+          {
+            baseId: secrets.AIRTABLE.BASE_ID,
+            tableName: secrets.AIRTABLE.TABLE_NAME,
+          },
+        ],
+      },
     },
   ],
   pathPrefix: '/',

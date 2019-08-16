@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 import { css } from '@emotion/core';
+import { useStaticQuery, graphql } from 'gatsby';
 import viewmodel from '../json';
 import ButtonGroup from '../components/ButtonGroup';
 import Slot from '../components/Slot';
@@ -54,81 +55,92 @@ const expandMoreStyle = css`
   color: ${colors.blue};
 `;
 
-class SchedulePage extends React.Component {
-  constructor() {
-    super();
-    this.onDayClick = this.onDayClick.bind(this);
-    this.onSelectChange = this.onSelectChange.bind(this);
-    this.state = {
-      activeIndex: 0,
-    };
-  }
+const SchedulePage = props => {
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  onDayClick(evt, activeIndex) {
+  const onDayClick = (evt, activeIndex) => {
     evt.preventDefault();
-    this.setState({ activeIndex }, () => {
-      window.location.hash = `#${activeIndex}`;
-    });
-  }
+    setActiveIndex((window.location.hash = `#${activeIndex}`));
+  };
 
-  onSelectChange(evt) {
-    const scheduleDay = viewmodel.schedules[evt.target.value];
+  const onSelectChange = evt => {
+    const scheduleDay = viewmodel.schedules(evt.target.value);
     window.location.hash = `#${
       viewmodel.schedules[evt.target.value]
         ? scheduleDay.date
         : viewmodel.schedules[0].date
     }`;
+  };
+
+  const { location } = props;
+  const StyledSafeLink = StyledLink.withComponent(SafeLink);
+  const dayInUrl = viewmodel.schedules.find(
+    scheduleDay => scheduleDay.date === location.hash.substring(1),
+  );
+  const activeDay = dayInUrl || viewmodel.schedules[0];
+
+  if (!activeDay || !activeDay.day) {
+    return <span>Her skjedde noe feil gitt...</span>;
   }
 
-  render() {
-    const { location } = this.props;
-    const StyledSafeLink = StyledLink.withComponent(SafeLink);
-    const dayInUrl = viewmodel.schedules.find(
-      scheduleDay => scheduleDay.date === location.hash.substring(1),
-    );
-    const activeDay = dayInUrl || viewmodel.schedules[0];
+  const data = useStaticQuery(graphql`
+        query data { 
+        allAirtable {
+            edges {
+               node {
+                 data {
+                   Timestamp,
+                   Email_Address,
+                   Tittel,
+                   Lengde,
+                   Beskrivelse,
+                   Nokkelord
+                 }
+               }
+              }
+           }
+          }
+        `);
 
-    if (!activeDay || !activeDay.day) {
-      return <span>Her skjedde noe feil gitt...</span>;
-    }
-    return (
-      <DefaultLayout>
-        <Content>
-          <ContentSection
-            minHeight="10vh"
-            backgroundColor={colors.blueDark}
-            color="white">
-            <ButtonGroup
-              css={buttonGroupStyle}
-              overflow="scroll"
-              numberOfButtons={viewmodel.schedules.length}>
-              {viewmodel.schedules.map((day, index) => (
-                <StyledLinkContainer id={day.date}>
-                  <StyledSafeLink
-                    key={day.day}
-                    isActive={activeDay.date === day.date}
-                    to={`/schedule#${day.date}`}>
-                    {day.day}
-                  </StyledSafeLink>
-                  {activeDay.date === day.date && (
-                    <ExpandMore css={expandMoreStyle} fontSize="large" />
-                  )}
-                </StyledLinkContainer>
-              ))}
-            </ButtonGroup>
-          </ContentSection>
-          <ContentSection withTopSeperator withBottomSeperator>
-            {activeDay.collections.map((collection, index) => (
-              <Slot
-                key={`${collection.title}_${index}`}
-                collection={collection}
-              />
+  console.log(data);
+
+  return (
+    <DefaultLayout>
+      <Content>
+        <ContentSection
+          minHeight="10vh"
+          backgroundColor={colors.blueDark}
+          color="white">
+          <ButtonGroup
+            css={buttonGroupStyle}
+            overflow="scroll"
+            numberOfButtons={viewmodel.schedules.length}>
+            {viewmodel.schedules.map((day, index) => (
+              <StyledLinkContainer id={day.date}>
+                <StyledSafeLink
+                  key={day.day}
+                  isActive={activeDay.date === day.date}
+                  to={`/schedule#${day.date}`}>
+                  {day.day}
+                </StyledSafeLink>
+                {activeDay.date === day.date && (
+                  <ExpandMore css={expandMoreStyle} fontSize="large" />
+                )}
+              </StyledLinkContainer>
             ))}
-          </ContentSection>
-        </Content>
-      </DefaultLayout>
-    );
-  }
-}
+          </ButtonGroup>
+        </ContentSection>
+        <ContentSection withTopSeperator withBottomSeperator>
+          {activeDay.collections.map((collection, index) => (
+            <Slot
+              key={`${collection.title}_${index}`}
+              collection={collection}
+            />
+          ))}
+        </ContentSection>
+      </Content>
+    </DefaultLayout>
+  );
+};
 
 export default SchedulePage;
