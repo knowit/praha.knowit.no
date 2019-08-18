@@ -89,12 +89,15 @@ const SchedulePage = props => {
             edges {
                node {
                  data {
-                   Timestamp,
-                   Email_Address,
-                   Tittel,
-                   Lengde,
-                   Beskrivelse,
-                   Nokkelord
+                   title,
+                   userId,
+                   beskrivelse,
+                   type,
+                   start,
+                   end,
+                   date,
+                   duration,
+                   rom
                  }
                }
               }
