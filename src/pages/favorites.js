@@ -1,32 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import Favorite from '@material-ui/icons/Favorite';
+import viewmodel from '../json';
+import ButtonGroup from '../components/ButtonGroup';
+import Slot from '../components/Slot';
 import Content from '../components/Content';
-import Layout from '../layouts';
-import ContentSection from '../components/ContentSection';
-import HeaderTwoWithIcon from '../components/HeaderTwoWithIcon';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
+import mediaQueries from '../util/mediaQueries';
+import SafeLink from '../components/SafeLink';
+import DefaultLayout from '../layouts';
+import ContentSection from '../components/ContentSection';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import { getCookie, setCookie } from '../util/cookieHelper';
+import Slots from '../components/Slot/Slots';
 
-const Favoritesage = () => {
+const FavoritesPage = () => {
+  const favoriteCookies = getCookie('favorites', document.cookie);
+  const [favorites, setFavorites] = useState([]);
+  const isActive = uniqueSlotIdentifier =>
+    !!favorites.find(favorite => favorite === uniqueSlotIdentifier);
+
+  useEffect(() => {
+    setFavorites(favoriteCookies ? JSON.parse(favoriteCookies) : []);
+  }, []);
+
+  const allCollections = viewmodel.schedules
+    .flatMap(schedule =>
+      schedule.collections.map(collection => ({
+        ...collection,
+        date: schedule.date,
+      })),
+    )
+    .filter(({ date, start, time, title }) =>
+      isActive(`${date}_${start || time}_${title}`),
+    );
   return (
-    <Layout>
+    <DefaultLayout>
       <Content>
-        <ContentSection withBottomSeperator minHeight="100vh">
-          <HeaderTwoWithIcon>
-            <Favorite
-              css={css`
-                margin-right: ${spacing.small};
-                color: ${colors.heartRed};
-              `}
-            />
-            Favoritter
-          </HeaderTwoWithIcon>
-          <p>Kommer...</p>
+        <ContentSection withTopSeperator withBottomSeperator>
+          <Slots collections={allCollections} removeFavorite={setFavorites} />
         </ContentSection>
       </Content>
-    </Layout>
+    </DefaultLayout>
   );
 };
 
-export default Favoritesage;
+export default FavoritesPage;

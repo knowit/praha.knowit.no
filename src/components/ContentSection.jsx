@@ -9,7 +9,7 @@ import mediaQueries from '../util/mediaQueries';
 const StyledSection = styled.div`
   background-color: ${p => p.backgroundColor || colors.blueLighest};
   min-height: ${p => p.minHeight || '50vh'};
-  color: ${p => p.color || 'black'};
+  color: ${p => p.color || colors.blueDark};
 `;
 const StyledInnerSection = styled.div`
   padding: 1rem 15%;
@@ -19,7 +19,7 @@ const StyledInnerSection = styled.div`
   }
 
   @media (${mediaQueries.medium}) {
-    padding: 0 ${spacing.small};
+    padding: 0 ${spacing.large};
   }
 `;
 

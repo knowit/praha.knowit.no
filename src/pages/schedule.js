@@ -12,6 +12,7 @@ import SafeLink from '../components/SafeLink';
 import DefaultLayout from '../layouts';
 import ContentSection from '../components/ContentSection';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import Slots from '../components/Slot/Slots';
 
 const buttonGroupStyle = css`
   margin: ${spacing.large} auto;
@@ -86,9 +87,9 @@ class SchedulePage extends React.Component {
     const dayInUrl = viewmodel.schedules.find(
       scheduleDay => scheduleDay.date === location.hash.substring(1),
     );
-    const activeDay = dayInUrl || viewmodel.schedules[0];
-
-    if (!activeDay || !activeDay.day) {
+    const activeDay = dayInUrl || viewmodel.days[0];
+    console.log(activeDay);
+    if (!activeDay || !activeDay.date) {
       return <span>Her skjedde noe feil gitt...</span>;
     }
     return (
@@ -102,13 +103,13 @@ class SchedulePage extends React.Component {
               css={buttonGroupStyle}
               overflow="scroll"
               numberOfButtons={viewmodel.schedules.length}>
-              {viewmodel.schedules.map((day, index) => (
+              {viewmodel.days.map(day => (
                 <StyledLinkContainer id={day.date}>
                   <StyledSafeLink
-                    key={day.day}
+                    key={day.label}
                     isActive={activeDay.date === day.date}
                     to={`/schedule#${day.date}`}>
-                    {day.day}
+                    {day.label}
                   </StyledSafeLink>
                   {activeDay.date === day.date && (
                     <ExpandMore css={expandMoreStyle} fontSize="large" />
@@ -118,12 +119,11 @@ class SchedulePage extends React.Component {
             </ButtonGroup>
           </ContentSection>
           <ContentSection withTopSeperator withBottomSeperator>
-            {activeDay.collections.map((collection, index) => (
-              <Slot
-                key={`${collection.title}_${index}`}
-                collection={collection}
-              />
-            ))}
+            <Slots
+              slots={viewmodel.schedules.filter(
+                slot => slot.date === activeDay.date,
+              )}
+            />
           </ContentSection>
         </Content>
       </DefaultLayout>

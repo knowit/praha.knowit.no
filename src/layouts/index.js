@@ -17,7 +17,7 @@ const DefaultLayout = ({ children, showGoogleMaps }) => {
           { name: 'keywords', content: viewmodel.meta.description },
         ]}>
         <link
-          href="https://fonts.googleapis.com/css?family=Raleway"
+          href="https://fonts.googleapis.com/css?family=Raleway&display=swap"
           rel="stylesheet"
         />
       </Helmet>

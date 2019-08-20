@@ -57,7 +57,7 @@ ShowButton.propTypes = {
   setShowDescription: PropTypes.func.isRequired,
 };
 
-const EntriesSlot = ({ collection }) => {
+const EntriesSlot = ({ collection, date, favorites, setFavorites }) => {
   const descriptionRef = React.createRef();
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
@@ -71,6 +71,7 @@ const EntriesSlot = ({ collection }) => {
     },
     [collection.description],
   );
+
   return (
     <StyledSlot>
       <StyledSlotType type="talk" />
@@ -119,13 +120,20 @@ const EntriesSlot = ({ collection }) => {
           </div>
         )}
       </StyledSlotContent>
-      <AddFavorite />
+      <AddFavorite
+        title={collection.title}
+        startTime={collection.start}
+        setFavorites={setFavorites}
+        favorites={favorites}
+        date={date}
+      />
     </StyledSlot>
   );
 };
 
 EntriesSlot.propTypes = {
   collection: PropTypes.object,
+  date: PropTypes.string.isRequired,
 };
 
 export default EntriesSlot;
