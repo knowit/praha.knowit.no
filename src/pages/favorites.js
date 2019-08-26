@@ -7,7 +7,10 @@ import { getCookie } from '../util/cookieHelper';
 import Slots from '../components/Slot/Slots';
 
 const FavoritesPage = () => {
-  const favoriteCookies = getCookie('favorites', document.cookie);
+  const favoriteCookies = getCookie(
+    'favorites',
+    typeof document !== 'undefiend' ? document.cookie : '',
+  );
   const [favorites, setFavorites] = useState([]);
   const isActive = uniqueSlotIdentifier =>
     !!favorites.find(favorite => favorite === uniqueSlotIdentifier);
