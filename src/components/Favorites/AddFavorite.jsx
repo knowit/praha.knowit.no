@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import colors from '../../util/colors';
 import Button from '../Button';
 import css from '@emotion/css';
 import spacing from '../../util/spacing';
-import { getCookie, setCookie } from '../../util/cookieHelper';
 import styled from '@emotion/styled-base';
 
 const StyledFavoriteIcon = styled(FavoriteIcon)`

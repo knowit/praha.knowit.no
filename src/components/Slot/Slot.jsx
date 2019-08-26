@@ -5,16 +5,6 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Home from '@material-ui/icons/Home';
 import Person from '@material-ui/icons/Person';
 import AddFavorite from '../Favorites/AddFavorite';
-import {
-  StyledSlot,
-  StyledSlotTime,
-  StyledSlotContent,
-  StyledSlotType,
-  StyledSlotTitle,
-  StyledSlotTimeContainer,
-  StyledSlotDuration,
-  StyledSlotDescription,
-} from './SlotStyles';
 import spacing from '../../util/spacing';
 import Button from '../Button';
 import {
@@ -34,7 +24,7 @@ import {
   StyledRoomName,
   StyledRoomIcon,
   StyledUserIcon,
-} from './NewSlotStyles';
+} from './SlotStyles';
 
 const maxLengthStyle = maxLength => css`
   max-width: ${maxLength}px;
@@ -77,7 +67,7 @@ ShowButton.propTypes = {
   setShowDescription: PropTypes.func.isRequired,
 };
 
-const NewSlot = ({ slot, date, favorites, setFavorites }) => {
+const Slot = ({ slot, date, favorites, setFavorites }) => {
   const descriptionRef = React.createRef();
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
@@ -172,8 +162,8 @@ const NewSlot = ({ slot, date, favorites, setFavorites }) => {
   );
 };
 
-NewSlot.propTypes = {
+Slot.propTypes = {
   slot: PropTypes.object,
 };
 
-export default NewSlot;
+export default Slot;

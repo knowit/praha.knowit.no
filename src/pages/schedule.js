@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/core';
 import viewmodel from '../json';
 import ButtonGroup from '../components/ButtonGroup';
-import Slot from '../components/Slot';
 import Content from '../components/Content';
 import colors from '../util/colors';
 import spacing from '../util/spacing';
@@ -14,8 +13,14 @@ import ContentSection from '../components/ContentSection';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import Slots from '../components/Slot/Slots';
 
-const buttonGroupStyle = css`
+const buttonGroupStyle = numberOfButtons => css`
   margin: ${spacing.large} auto;
+
+  @media (${mediaQueries.medium}) {
+    grid-template-columns: 100%;
+    grid-template-rows: repeat(${numberOfButtons}, auto [col-start]);
+    grid-row-gap: 10px;
+  }
 `;
 
 const isActiveStyle = css`
@@ -30,6 +35,10 @@ const StyledLinkContainer = styled.div`
   align-items: center;
   white-space: nowrap;
   @media (${mediaQueries.medium}) {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: auto;
+    grid-template-areas: 'button arrow';
   }
 `;
 
@@ -41,18 +50,22 @@ const StyledLink = styled.a`
   border: 1px solid ${colors.blue};
   border-radius: 50px;
   text-align: center;
-  ${p => p.isActive && isActiveStyle};
+  display: ${p => p.isActive && isActiveStyle};
   &:hover,
   &:focus {
     ${isActiveStyle};
   }
   @media (${mediaQueries.medium}) {
+    grid-area: button;
   }
 `;
 
 const expandMoreStyle = css`
   margin-top: ${spacing.xsmall};
   color: ${colors.blue};
+  @media (${mediaQueries.medium}) {
+    grid-area: arrow;
+  }
 `;
 
 class SchedulePage extends React.Component {
@@ -100,13 +113,11 @@ class SchedulePage extends React.Component {
             backgroundColor={colors.blueDark}
             color="white">
             <ButtonGroup
-              css={buttonGroupStyle}
-              overflow="scroll"
-              numberOfButtons={viewmodel.schedules.length}>
+              css={buttonGroupStyle(viewmodel.days.length)}
+              numberOfButtons={viewmodel.days.length}>
               {viewmodel.days.map(day => (
-                <StyledLinkContainer id={day.date}>
+                <StyledLinkContainer id={day.date} key={day.label}>
                   <StyledSafeLink
-                    key={day.label}
                     isActive={activeDay.date === day.date}
                     to={`/schedule#${day.date}`}>
                     {day.label}
