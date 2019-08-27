@@ -5,7 +5,6 @@ import { getCookie, setCookie } from '../../util/cookieHelper';
 
 const Slots = ({ slots, removeFavorite }) => {
   const [favorites, setFavorites] = useState([]);
-  const favoritesCookies = getCookie('favorites', document.cookie);
 
   const updateFavorites = newFavorites => {
     setCookie('favorites', JSON.stringify(newFavorites));
@@ -14,6 +13,7 @@ const Slots = ({ slots, removeFavorite }) => {
   };
 
   useEffect(() => {
+    const favoritesCookies = getCookie('favorites', document.cookie);
     const currentCookie = favoritesCookies ? JSON.parse(favoritesCookies) : [];
     setFavorites(currentCookie);
   }, []);
