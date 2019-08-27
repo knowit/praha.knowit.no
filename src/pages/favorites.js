@@ -7,15 +7,12 @@ import { getCookie } from '../util/cookieHelper';
 import Slots from '../components/Slot/Slots';
 
 const FavoritesPage = () => {
-  const favoriteCookies = getCookie(
-    'favorites',
-    typeof document !== 'undefiend' ? document.cookie : '',
-  );
   const [favorites, setFavorites] = useState([]);
   const isActive = uniqueSlotIdentifier =>
     !!favorites.find(favorite => favorite === uniqueSlotIdentifier);
 
   useEffect(() => {
+    const favoriteCookies = getCookie('favorites', document.cookie);
     setFavorites(favoriteCookies ? JSON.parse(favoriteCookies) : []);
   }, []);
 
