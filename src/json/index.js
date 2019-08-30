@@ -18,6 +18,7 @@ export const eventData = {
   city: 'Praha',
   country: 'Tsjekkia',
   year,
+  monthNumber: 10,
   season,
   startDate,
   endDate,

@@ -6,20 +6,17 @@ import NextUp from './NextUp';
 import Favorites from './Favorites';
 
 const StyledTwoColumn = styled.div`
-  display: grid;
-  grid-column-gap: ${spacing.normal};
-  grid-template-columns: repeat(2, auto [col-start]);
   min-height: 30vh;
   & > div:first-child {
     border-right: 2px solid ${colors.blue};
   }
 `;
 
-const TwoColumnInfo = () => {
+const TwoColumnInfo = ({ favorites }) => {
   return (
     <StyledTwoColumn>
       <NextUp />
-      <Favorites />
+      <Favorites favorites={favorites} />
     </StyledTwoColumn>
   );
 };

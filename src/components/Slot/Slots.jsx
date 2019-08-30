@@ -4,7 +4,7 @@ import groupBy from 'lodash/groupBy';
 import Slot from '.';
 import { getCookie, setCookie } from '../../util/cookieHelper';
 
-const Slots = ({ slots, removeFavorite }) => {
+const Slots = ({ slots, removeFavorite, noGroupBy }) => {
   const [favorites, setFavorites] = useState([]);
 
   const updateFavorites = newFavorites => {
@@ -19,6 +19,16 @@ const Slots = ({ slots, removeFavorite }) => {
     setFavorites(currentCookie);
   }, []);
 
+  if (noGroupBy) {
+    return slots.map((slot, index) => (
+      <Slot
+        key={`${slot.title}_${index}`}
+        slot={slot}
+        setFavorites={updateFavorites}
+        favorites={favorites}
+      />
+    ));
+  }
   const groupedByStart = groupBy(slots, slot => slot.start);
   return Object.keys(groupedByStart).map(startKey => (
     <div>
@@ -38,6 +48,11 @@ const Slots = ({ slots, removeFavorite }) => {
 Slots.propTypes = {
   slots: PropTypes.arrayOf(PropTypes.object),
   removeFavorite: PropTypes.func,
+  noGroupBy: PropTypes.bool,
+};
+
+Slots.defaultProps = {
+  noGroupBy: false,
 };
 
 export default Slots;

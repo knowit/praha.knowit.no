@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import styled from '@emotion/styled';
 import { css } from '@emotion/core';
-import viewmodel from '../json';
+import styled from '@emotion/styled';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import { isToday } from 'date-fns';
+import React, { useEffect, useState } from 'react';
 import ButtonGroup from '../components/ButtonGroup';
 import Content from '../components/Content';
-import colors from '../util/colors';
-import spacing from '../util/spacing';
-import mediaQueries from '../util/mediaQueries';
-import SafeLink from '../components/SafeLink';
-import DefaultLayout from '../layouts';
 import ContentSection from '../components/ContentSection';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import Slots from '../components/Slot/Slots';
 import Filters from '../components/Filters';
+import SafeLink from '../components/SafeLink';
+import Slots from '../components/Slot/Slots';
+import viewmodel, { eventData } from '../json';
+import DefaultLayout from '../layouts';
+import colors from '../util/colors';
+import mediaQueries from '../util/mediaQueries';
+import spacing from '../util/spacing';
 
 const buttonGroupStyle = numberOfButtons => css`
   margin: ${spacing.large} auto;
@@ -78,14 +79,20 @@ const expandMoreStyle = css`
   }
 `;
 
+export const getActiveDay = () => {
+  const todayDate = viewmodel.days.find(day =>
+    isToday(new Date(eventData.year, eventData.monthNumber - 1, day.date)),
+  );
+  return todayDate || viewmodel.days[0];
+};
+
 const SchedulePage = ({ location }) => {
   const StyledSafeLink = StyledLink.withComponent(SafeLink);
   const [activeFilter, setActiveFilter] = useState('');
   const dayInUrl = viewmodel.schedules.find(
     scheduleDay => scheduleDay.date === location.hash.substring(1),
   );
-  const activeDay = dayInUrl || viewmodel.days[0];
-  console.log(activeDay);
+  const activeDay = dayInUrl || getActiveDay();
   if (!activeDay || !activeDay.date) {
     return <span>Her skjedde noe feil gitt...</span>;
   }
