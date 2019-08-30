@@ -52,6 +52,7 @@ export const StyledButton = styled.button`
   color: white;
   font-size: 1.2rem;
   font-weight: 100;
+  font-family: 'Raleway', sans-serif;
   border-radius: 30px;
   &:hover,
   &:focus {

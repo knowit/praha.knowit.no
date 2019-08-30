@@ -1,32 +1,34 @@
-import React from 'react';
-import { css } from '@emotion/core';
-import Favorite from '@material-ui/icons/Favorite';
+import React, { useState, useEffect } from 'react';
+import viewmodel from '../json';
 import Content from '../components/Content';
-import Layout from '../layouts';
+import DefaultLayout from '../layouts';
 import ContentSection from '../components/ContentSection';
-import HeaderTwoWithIcon from '../components/HeaderTwoWithIcon';
-import colors from '../util/colors';
-import spacing from '../util/spacing';
+import { getCookie } from '../util/cookieHelper';
+import Slots from '../components/Slot/Slots';
 
-const Favoritesage = () => {
+const FavoritesPage = () => {
+  const [favorites, setFavorites] = useState([]);
+  const isActive = uniqueSlotIdentifier =>
+    !!favorites.find(favorite => favorite === uniqueSlotIdentifier);
+
+  useEffect(() => {
+    const favoriteCookies = getCookie('favorites', document.cookie);
+    setFavorites(favoriteCookies ? JSON.parse(favoriteCookies) : []);
+  }, []);
+
+  const allCollections = viewmodel.schedules.filter(
+    ({ date, start, time, title }) =>
+      isActive(`${date}_${start || time}_${title}`),
+  );
   return (
-    <Layout>
+    <DefaultLayout>
       <Content>
-        <ContentSection withBottomSeperator minHeight="100vh">
-          <HeaderTwoWithIcon>
-            <Favorite
-              css={css`
-                margin-right: ${spacing.small};
-                color: ${colors.heartRed};
-              `}
-            />
-            Favoritter
-          </HeaderTwoWithIcon>
-          <p>Kommer...</p>
+        <ContentSection minHeight="100vh" withTopSeperator withBottomSeperator>
+          <Slots slots={allCollections} removeFavorite={setFavorites} />
         </ContentSection>
       </Content>
-    </Layout>
+    </DefaultLayout>
   );
 };
 
-export default Favoritesage;
+export default FavoritesPage;
