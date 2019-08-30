@@ -23,7 +23,7 @@ const FavoritesPage = () => {
   return (
     <DefaultLayout>
       <Content>
-        <ContentSection withTopSeperator withBottomSeperator>
+        <ContentSection minHeight="100vh" withTopSeperator withBottomSeperator>
           <Slots slots={allCollections} removeFavorite={setFavorites} />
         </ContentSection>
       </Content>

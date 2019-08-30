@@ -4,14 +4,36 @@ import colors from '../../util/colors';
 import mediaQueries from '../../util/mediaQueries';
 import spacing from '../../util/spacing';
 
-const typeColors = {
-  other: colors.green,
-  talk: colors.blue,
-  workshop: colors.blue,
+export const typeColors = {
+  other: colors.blueDark,
+  talk: colors.green,
+  keynote: colors.blue,
 };
 
 const gridTemplates = {
   talk: {
+    desktop: css`
+      grid-template-rows: auto;
+      grid-template-columns: 10% auto 10%;
+      grid-template-areas:
+        'time     title       favorite'
+        'duration description favorite'
+        '.        speakers    speakers'
+        '.        room        room';
+    `,
+    mobile: css`
+      grid-template-rows: auto auto auto auto auto auto;
+      grid-template-columns: 70% 30%;
+      grid-template-areas:
+        'time        favorite'
+        'duration    favorite'
+        'title       title'
+        'description description'
+        'speakers    speakers'
+        'room        room';
+    `,
+  },
+  keynote: {
     desktop: css`
       grid-template-rows: auto;
       grid-template-columns: 10% auto 10%;

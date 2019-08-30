@@ -42,6 +42,9 @@ const globalStyles = css`
     opacity: 0.01;
     transition: opacity 300ms ease-in;
   }
+  a {
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
 
 const Content = ({ children, ...rest }) => (

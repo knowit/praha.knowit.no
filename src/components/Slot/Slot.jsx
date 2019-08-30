@@ -93,7 +93,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
           <b>{slot.title}</b>
         </StyledTitle>
         <StyledTime>
-          <b>{slot.time || `${slot.start} - ${slot.end}`}</b>
+          <b>{`${slot.start} ${slot.end ? '-' : ''} ${slot.end || ''}`}</b>
         </StyledTime>
         {slot.duration && (
           <StyledDuration>{slot.duration || 'Ikke oppgitt'}</StyledDuration>

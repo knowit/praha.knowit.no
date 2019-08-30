@@ -55,57 +55,61 @@ const viewmodel = {
   days: [
     {
       date: '18',
-      label: 'Fredag 18. Oktober',
+      label: 'Fredag 18.10',
     },
     {
       date: '19',
-      label: 'Lørdag 19. Oktober',
+      label: 'Lørdag 19.10',
     },
     {
       date: '20',
-      label: 'Søndag 20. Oktober',
+      label: 'Søndag 20.10',
     },
     {
       date: '21',
-      label: 'Mandag 21. Oktober',
+      label: 'Mandag 21.10',
     },
   ],
   schedules: [
     {
       date: '18',
-      time: '19:00',
+      start: '19:00',
       title: '1 Fly fra Oslo Lufthavn',
     },
     {
       date: '18',
-      time: '19:25',
+      start: '19:25',
       title: '2 Fly fra Oslo Lufthavn',
     },
 
     {
       date: '19',
-      time: '06:30 - 09:00',
+      start: '06:30',
+      end: '09:00',
       title: 'Frokost',
     },
     {
       date: '19',
-      time: '09:00 - 17:00',
+      start: '09:00',
+      end: '17:00',
       title: 'Heldagskonferanse',
     },
     {
       date: '19',
-      time: '19:00',
+      start: '19:00',
       title: 'Middag',
     },
 
     {
       date: '20',
-      time: '06:30 - 09:00',
+      start: '06:30',
+      end: '09:00',
       title: 'Frokost',
     },
     {
       date: '20',
-      time: '09:00 - 13:00',
+      start: '09:00',
+      end: '13:00',
       title: 'Heldagskonferanse',
     },
     {
@@ -122,28 +126,31 @@ const viewmodel = {
     },
     {
       date: '20',
-      time: '13:00 - 18:00',
+      start: '13:00',
+      end: '18:00',
       title: 'Fritid',
     },
     {
       date: '20',
-      time: '18:00',
+      start: '18:00',
       title: 'Middag',
     },
 
     {
       date: '21',
-      time: '06:30 - 09:00',
+      start: '06:30',
+      end: '09:00',
       title: 'Frokost',
     },
     {
       date: '21',
-      time: '09:00 - 15:30',
+      start: '09:00',
+      end: '15:30',
       title: 'Aktiviteter',
     },
     {
       date: '21',
-      time: '17:00',
+      start: '17:00',
       title: 'Fly til Oslo Lufthavn',
     },
   ],

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import groupBy from 'lodash/groupBy';
 import Slot from '.';
 import { getCookie, setCookie } from '../../util/cookieHelper';
 
@@ -18,13 +19,19 @@ const Slots = ({ slots, removeFavorite }) => {
     setFavorites(currentCookie);
   }, []);
 
-  return slots.map((slot, index) => (
-    <Slot
-      key={`${slot.title}_${index}`}
-      slot={slot}
-      setFavorites={updateFavorites}
-      favorites={favorites}
-    />
+  const groupedByStart = groupBy(slots, slot => slot.start);
+  return Object.keys(groupedByStart).map(startKey => (
+    <div>
+      <h3>{startKey}</h3>
+      {groupedByStart[startKey].map((slot, index) => (
+        <Slot
+          key={`${slot.title}_${index}`}
+          slot={slot}
+          setFavorites={updateFavorites}
+          favorites={favorites}
+        />
+      ))}
+    </div>
   ));
 };
 
