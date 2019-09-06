@@ -1,21 +1,38 @@
-import React, { useState } from 'react';
-import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/core';
-import { useStaticQuery, graphql } from 'gatsby';
-import viewmodel from '../json';
-import ButtonGroup from '../components/ButtonGroup';
-import Slot from '../components/Slot';
-import Content from '../components/Content';
-import colors from '../util/colors';
-import spacing from '../util/spacing';
-import mediaQueries from '../util/mediaQueries';
-import SafeLink from '../components/SafeLink';
-import DefaultLayout from '../layouts';
-import ContentSection from '../components/ContentSection';
+import styled from '@emotion/styled';
 import ExpandMore from '@material-ui/icons/ExpandMore';
+import { isToday } from 'date-fns';
+import ButtonGroup from '../components/ButtonGroup';
+import Content from '../components/Content';
+import ContentSection from '../components/ContentSection';
+import Filters from '../components/Filters';
+import SafeLink from '../components/SafeLink';
+import Slots from '../components/Slot/Slots';
+import viewmodel, { eventData } from '../json';
+import DefaultLayout from '../layouts';
+import colors from '../util/colors';
+import mediaQueries from '../util/mediaQueries';
+import spacing from '../util/spacing';
+import { fetchSlots } from '../graphql/airtable';
+import { filterTypes } from '../components/Filters/Filters';
 
-const buttonGroupStyle = css`
+const buttonGroupStyle = numberOfButtons => css`
   margin: ${spacing.large} auto;
+  margin-bottom: 0;
+  grid-template-columns: 100%;
+  grid-template-rows: ${spacing.xlarge};
+  grid-template-columns: 25% 25% 25% 25%;
+  width: 80%;
+  grid-template-rows: auto;
+
+  @media (${mediaQueries.medium}) {
+    grid-row-gap: 10px;
+    width: 100%;
+    grid-template-rows: auto auto;
+    grid-template-columns: 50% 50%;
+    margin-bottom: ${spacing.normal};
+  }
 `;
 
 const isActiveStyle = css`
@@ -27,9 +44,11 @@ const isActiveStyle = css`
 const StyledLinkContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-  white-space: nowrap;
   @media (${mediaQueries.medium}) {
+    display: grid;
+    grid-template-columns: 90% 10%;
+    grid-template-rows: auto;
+    grid-template-areas: 'button arrow';
   }
 `;
 
@@ -41,90 +60,82 @@ const StyledLink = styled.a`
   border: 1px solid ${colors.blue};
   border-radius: 50px;
   text-align: center;
-  ${p => p.isActive && isActiveStyle};
+  display: ${p => p.isActive && isActiveStyle};
   &:hover,
   &:focus {
     ${isActiveStyle};
   }
   @media (${mediaQueries.medium}) {
+    grid-area: button;
   }
 `;
 
 const expandMoreStyle = css`
   margin-top: ${spacing.xsmall};
   color: ${colors.blue};
+  visibility: visible;
+  align-self: center;
+  @media (${mediaQueries.medium}) {
+    grid-area: arrow;
+    visibility: hidden;
+  }
 `;
 
-const SchedulePage = props => {
-  const [activeIndex, setActiveIndex] = useState(0);
+export const getActiveDay = () => {
+  const todayDate = viewmodel.days.find(day =>
+    isToday(new Date(eventData.year, eventData.monthNumber - 1, day.date)),
+  );
+  return todayDate || viewmodel.days[0];
+};
 
-  const onDayClick = (evt, activeIndex) => {
-    evt.preventDefault();
-    setActiveIndex((window.location.hash = `#${activeIndex}`));
-  };
-
-  const onSelectChange = evt => {
-    const scheduleDay = viewmodel.schedules(evt.target.value);
-    window.location.hash = `#${
-      viewmodel.schedules[evt.target.value]
-        ? scheduleDay.date
-        : viewmodel.schedules[0].date
-    }`;
-  };
-
-  const { location } = props;
+const SchedulePage = ({ location }) => {
   const StyledSafeLink = StyledLink.withComponent(SafeLink);
-  const dayInUrl = viewmodel.schedules.find(
+  const [activeFilters, setActiveFilters] = useState(
+    filterTypes.map(filter => filter.type),
+  );
+  const dayInUrl = viewmodel.days.find(
     scheduleDay => scheduleDay.date === location.hash.substring(1),
   );
-  const activeDay = dayInUrl || viewmodel.schedules[0];
-
-  if (!activeDay || !activeDay.day) {
+  const activeDay = dayInUrl || getActiveDay();
+  if (!activeDay || !activeDay.date) {
     return <span>Her skjedde noe feil gitt...</span>;
   }
+  const slots = fetchSlots();
+  const onChangeActiveFilters = newFilter => {
+    const updatedActiveFilters = activeFilters.includes(newFilter)
+      ? activeFilters.filter(filter => filter !== newFilter)
+      : [...activeFilters, newFilter];
+    setActiveFilters(updatedActiveFilters);
+  };
 
-  const data = useStaticQuery(graphql`
-        query data { 
-        allAirtable {
-            edges {
-               node {
-                 data {
-                   title,
-                   userId,
-                   beskrivelse,
-                   type,
-                   start,
-                   end,
-                   date,
-                   duration,
-                   rom
-                 }
-               }
-              }
-           }
-          }
-        `);
+  useEffect(() => {
+    setActiveFilters(filterTypes.map(filter => filter.type));
+  }, [location]);
 
-  console.log(data);
+  const currenSlots = slots
+    .filter(slot => slot.date === activeDay.date)
+    .filter(slot =>
+      activeFilters.length > 0
+        ? activeFilters.includes(slot.type || 'other')
+        : true,
+    );
 
   return (
     <DefaultLayout>
       <Content>
         <ContentSection
-          minHeight="10vh"
+          minHeight="5vh"
           backgroundColor={colors.blueDark}
           color="white">
           <ButtonGroup
-            css={buttonGroupStyle}
-            overflow="scroll"
-            numberOfButtons={viewmodel.schedules.length}>
-            {viewmodel.schedules.map((day, index) => (
-              <StyledLinkContainer id={day.date}>
+            css={buttonGroupStyle(viewmodel.days.length)}
+            numberOfButtons={viewmodel.days.length}>
+            {viewmodel.days.map(day => (
+              <StyledLinkContainer key={day.label}>
                 <StyledSafeLink
-                  key={day.day}
                   isActive={activeDay.date === day.date}
                   to={`/schedule#${day.date}`}>
-                  {day.day}
+                  {day.label}
                 </StyledSafeLink>
                 {activeDay.date === day.date && (
                   <ExpandMore css={expandMoreStyle} fontSize="large" />
@@ -133,13 +144,12 @@ const SchedulePage = props => {
             ))}
           </ButtonGroup>
         </ContentSection>
-        <ContentSection withTopSeperator withBottomSeperator>
-          {activeDay.collections.map((collection, index) => (
-            <Slot
-              key={`${collection.title}_${index}`}
-              collection={collection}
-            />
-          ))}
+        <ContentSection minHeight="95vh" withTopSeperator withBottomSeperator>
+          <Filters
+            activeFilters={activeFilters}
+            onChangeActiveFilters={onChangeActiveFilters}
+          />
+          <Slots activeFilter={activeFilters} slots={currenSlots} />
         </ContentSection>
       </Content>
     </DefaultLayout>

@@ -21,11 +21,11 @@ const StyledNavigation = styled.div`
   justify-content: center;
   display: grid;
   grid-column-gap: ${spacing.normal};
-  grid-template-columns: repeat(3, ${spacing.spacingUnit * 4}px [col-start]);
+  grid-template-columns: repeat(3, ${spacing.spacingUnit * 6}px [col-start]);
 `;
 
 const StyledPushElement = styled.div`
-  height: 1em;
+  height: ${spacing.small};
   padding: ${spacing.small} 0;
 `;
 

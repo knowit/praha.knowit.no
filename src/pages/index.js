@@ -8,18 +8,19 @@ import Layout from '../layouts';
 import colors from '../util/colors';
 import ContentSection from '../components/ContentSection';
 import PrahaLogo from '../components/Icons/PrahaLogo';
-import TwoColumnInfo from '../components/Favorites';
 import spacing from '../util/spacing';
 import mediaQueries from '../util/mediaQueries';
+import NextUp from '../components/NextUp';
 
 const StyledLogoContainer = styled.div`
   text-align: center;
+  margin-top: ${spacing.large};
   @media (${mediaQueries.medium}) {
-    margin-top: ${spacing.normal};
+    margin-top: ${spacing.large};
   }
 `;
 
-const IndexPage = () => (
+const Frontpage = () => (
   <Layout showGoogleMaps>
     <Content>
       <ContentSection backgroundColor={colors.blueDark} color="white">
@@ -30,10 +31,7 @@ const IndexPage = () => (
           </Paragraph>
         </StyledLogoContainer>
       </ContentSection>
-      <ContentSection
-        previousSectionColor={colors.blueDark}
-        withBottomSeperator
-        withTopSeperator>
+      <ContentSection previousSectionColor={colors.blueDark} withTopSeperator>
         <h1>
           Fagseminar {eventData.season.longCapitalized} {eventData.year}
         </h1>
@@ -51,11 +49,11 @@ const IndexPage = () => (
         </Paragraph>
         <CodeOfConduct />
       </ContentSection>
-      <ContentSection backgroundColor={colors.blueDark} color="white">
-        <TwoColumnInfo />
+      <ContentSection withBottomSeperator>
+        <NextUp />
       </ContentSection>
     </Content>
   </Layout>
 );
 
-export default IndexPage;
+export default Frontpage;

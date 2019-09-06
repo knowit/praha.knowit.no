@@ -18,6 +18,7 @@ export const eventData = {
   city: 'Praha',
   country: 'Tsjekkia',
   year,
+  monthNumber: 10,
   season,
   startDate,
   endDate,
@@ -52,88 +53,106 @@ const viewmodel = {
       eventData.country
     }, Fag, Foredrag`,
   },
-  schedules: [
+  days: [
     {
       date: '18',
-      day: `Fredag ${eventData.startDate}`,
-      collections: [
-        {
-          time: '19:00',
-          title: '1 Fly fra Oslo Lufthavn',
-        },
-        {
-          time: '19:25',
-          title: '2 Fly fra Oslo Lufthavn',
-        },
-      ],
+      label: 'Fredag 18.10',
     },
     {
       date: '19',
-      day: 'Lørdag 19. Oktober',
-      collections: [
-        {
-          time: '06:30-09:00',
-          title: 'Frokost',
-        },
-        {
-          time: '09:00-17:00',
-          title: 'Heldagskonferanse',
-        },
-        {
-          time: '19:00',
-          title: 'Middag',
-        },
-      ],
+      label: 'Lørdag 19.10',
     },
     {
       date: '20',
-      day: 'Søndag 20. Oktober',
-      collections: [
-        {
-          time: '06:30-09:00',
-          title: 'Frokost',
-        },
-        {
-          time: '09:00-13:00',
-          title: 'Heldagskonferanse',
-        },
-        {
-          start: '09:00',
-          end: '13:00',
-          room: 'Orion',
-          title: 'Jan Henrik prater',
-          description:
-            'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
-          speakers: ['Jan Henrik', 'Jens Noe'],
-          type: 'talk',
-        },
-        {
-          time: '13:00-18:00',
-          title: 'Fritid',
-        },
-        {
-          time: '18:00',
-          title: 'Middag',
-        },
-      ],
+      label: 'Søndag 20.10',
     },
     {
       date: '21',
-      day: `Mandag ${eventData.endDate}`,
-      collections: [
-        {
-          time: '06:30-09:00',
-          title: 'Frokost',
-        },
-        {
-          time: '09:00-15:30',
-          title: 'Aktiviteter',
-        },
-        {
-          time: '17:00',
-          title: 'Fly til Oslo Lufthavn',
-        },
-      ],
+      label: 'Mandag 21.10',
+    },
+  ],
+  schedules: [
+    {
+      date: '18',
+      start: '19:00',
+      title: '1 Fly fra Oslo Lufthavn',
+    },
+    {
+      date: '18',
+      start: '19:25',
+      title: '2 Fly fra Oslo Lufthavn',
+    },
+
+    {
+      date: '19',
+      start: '06:30',
+      end: '09:00',
+      title: 'Frokost',
+    },
+    {
+      date: '19',
+      start: '09:00',
+      end: '17:00',
+      title: 'Heldagskonferanse',
+    },
+    {
+      date: '19',
+      start: '19:00',
+      title: 'Middag',
+    },
+
+    {
+      date: '20',
+      start: '06:30',
+      end: '09:00',
+      title: 'Frokost',
+    },
+    {
+      date: '20',
+      start: '09:00',
+      end: '13:00',
+      title: 'Heldagskonferanse',
+    },
+    {
+      date: '20',
+      start: '09:00',
+      end: '13:00',
+      room: 'Orion',
+      duration: '60 minutter',
+      title: 'Jan Henrik prater',
+      description:
+        'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32. The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.',
+      userIds: ['Jan Henrik', 'Jens Noe'],
+      type: 'talk',
+    },
+    {
+      date: '20',
+      start: '13:00',
+      end: '18:00',
+      title: 'Fritid',
+    },
+    {
+      date: '20',
+      start: '18:00',
+      title: 'Middag',
+    },
+
+    {
+      date: '21',
+      start: '06:30',
+      end: '09:00',
+      title: 'Frokost',
+    },
+    {
+      date: '21',
+      start: '09:00',
+      end: '15:30',
+      title: 'Aktiviteter',
+    },
+    {
+      date: '21',
+      start: '17:00',
+      title: 'Fly til Oslo Lufthavn',
     },
   ],
   talks: {
