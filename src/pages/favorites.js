@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import viewmodel from '../json';
 import Content from '../components/Content';
 import DefaultLayout from '../layouts';
 import ContentSection from '../components/ContentSection';
 import { getCookie } from '../util/cookieHelper';
 import Slots from '../components/Slot/Slots';
+import {fetchSlots} from "../graphql/airtable";
 
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -16,7 +16,8 @@ const FavoritesPage = () => {
     setFavorites(favoriteCookies ? JSON.parse(favoriteCookies) : []);
   }, []);
 
-  const allCollections = viewmodel.schedules.filter(
+  const slots = fetchSlots();
+  const allCollections = slots.filter(
     ({ date, start, time, title }) =>
       isActive(`${date}_${start || time}_${title}`),
   );
@@ -24,7 +25,7 @@ const FavoritesPage = () => {
     <DefaultLayout>
       <Content>
         <ContentSection minHeight="100vh" withTopSeperator withBottomSeperator>
-          <Slots slots={allCollections} removeFavorite={setFavorites} />
+          <Slots slots={allCollections} removeFavorite={setFavorites} isFavourites />
         </ContentSection>
       </Content>
     </DefaultLayout>
