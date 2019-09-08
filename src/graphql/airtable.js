@@ -9,13 +9,14 @@ export const fetchSlots = () => {
             data {
               title
               userIds
+              email
               description
               type
               start
               end
               date
               duration
-              rom
+              room
             }
           }
         }
