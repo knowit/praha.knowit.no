@@ -19,7 +19,8 @@ const gridTemplates = {
         'time     title       favorite'
         'duration description favorite'
         '.        speakers    speakers'
-        '.        room        room';
+        '.        room        room'
+        '.        speakerBio        .';
     `,
     mobile: css`
       grid-template-rows: auto auto auto auto auto auto;
@@ -30,7 +31,8 @@ const gridTemplates = {
         'title       title'
         'description description'
         'speakers    speakers'
-        'room        room';
+        'room        room'
+        'speakerBio .';
     `,
   },
   keynote: {
@@ -41,7 +43,8 @@ const gridTemplates = {
         'time     title       favorite'
         'duration description favorite'
         '.        speakers    speakers'
-        '.        room        room';
+        '.        room        room'
+        '.        speakerBio        .';
     `,
     mobile: css`
       grid-template-rows: auto auto auto auto auto auto;
@@ -52,7 +55,8 @@ const gridTemplates = {
         'title       title'
         'description description'
         'speakers    speakers'
-        'room        room';
+        'room        room'
+        'speakerBio .';
     `,
   },
   other: {
@@ -199,6 +203,11 @@ export const StyledSpeakers = styled.div`
       'speakerIcon speakerName';
   }
 `;
+
+export const StyledSpeakerBio = styled.div`
+  grid-area: speakerBio;
+`;
+
 
 export const StyledUserIcon = styled.div`
   grid-area: speakerIcon;

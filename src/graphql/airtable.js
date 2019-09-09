@@ -17,6 +17,7 @@ export const fetchSlots = () => {
               date
               duration
               room
+              speaker_bio
             }
           }
         }
