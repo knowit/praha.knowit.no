@@ -150,7 +150,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
             </StyledUserIcon>
             <StyledUserLabel>Foredragsholdere</StyledUserLabel>
             <StyledUserName>
-              <SlotSpeakers userIds={slot.userIds.split(',')} />
+              <SlotSpeakers slot={slot} />
             </StyledUserName>
           </StyledSpeakers>
         )}
@@ -162,32 +162,6 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
             <StyledRoomLabel>Rom:</StyledRoomLabel>
             <StyledRoomName>{slot.room}</StyledRoomName>
           </StyledRoom>
-        )}
-        {slot.speaker_bio && slot.type && slot.type !== 'other' && (
-          <StyledSpeakerBio ref={speakerbioRef}>
-            <div
-              css={
-                maxLength && !showSpeakerbio
-                  ? maxLengthStyle(maxLength)
-                  : css`
-                      display: inline-block;
-                    `
-              }>
-              {slot.speaker_bio}
-              {maxLength && showSpeakerbio && (
-                <ShowButton
-                  showDescription={showSpeakerbio}
-                  setShowDescription={setSpeakerbio}
-                />
-              )}
-            </div>
-            {maxLength && !showSpeakerbio && (
-              <ShowButton
-                showDescription={showSpeakerbio}
-                setShowDescription={setSpeakerbio}
-              />
-            )}
-          </StyledSpeakerBio>
         )}
       </StyledSlotGrid>
     </StyledSlotGridWrapper>
