@@ -5,6 +5,7 @@ module.exports = {
     title: 'Knowit Praha 2019',
   },
   plugins: [
+    'gatsby-source-filesystem',
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
