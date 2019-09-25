@@ -1,1 +1,0 @@
-{"errors":[{"message":"Cannot query field \"rom\" on type \"AirtableData\". Did you mean \"room\"?","locations":[{"line":14,"column":11}]}]}
