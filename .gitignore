@@ -8,3 +8,8 @@ yarn-error.log
 /public/*
 !/public/static/pics
 .DS_Store
+
+
+# Secrets
+
+secrets.js

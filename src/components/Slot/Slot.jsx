@@ -14,6 +14,7 @@ import {
   StyledType,
   StyledDescription,
   StyledSpeakers,
+  StyledSpeakerBio,
   StyledFavorite,
   StyledRoom,
   StyledDuration,
@@ -25,6 +26,7 @@ import {
   StyledRoomIcon,
   StyledUserIcon,
 } from './SlotStyles';
+import SlotSpeakers from './SlotSpeakers';
 
 const maxLengthStyle = maxLength => css`
   max-width: ${maxLength}px;
@@ -69,22 +71,28 @@ ShowButton.propTypes = {
 
 const Slot = ({ slot, date, favorites, setFavorites }) => {
   const descriptionRef = React.createRef();
+  const speakerbioRef = React.createRef();
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
+  const [showSpeakerbio, setSpeakerbio] = useState(false);
 
-  useEffect(
-    () => {
-      if (descriptionRef && descriptionRef.current) {
-        const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
-        if (getBoundingClientRectData.height > 25) {
-          setMaxLength(
-            getBoundingClientRectData.width - spacing.spacingUnit * 3,
-          );
-        }
+  useEffect(() => {
+    if (descriptionRef && descriptionRef.current) {
+      const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
+      if (getBoundingClientRectData.height > 25) {
+        setMaxLength(getBoundingClientRectData.width - spacing.spacingUnit * 3);
       }
-    },
-    [slot.description],
-  );
+    }
+  }, [slot.description]);
+
+  useEffect(() => {
+    if (speakerbioRef && speakerbioRef.current) {
+      const getBoundingClientRectData = speakerbioRef.current.getBoundingClientRect();
+      if (getBoundingClientRectData.height > 25) {
+        setMaxLength(getBoundingClientRectData.width - spacing.spacingUnit * 3);
+      }
+    }
+  }, [slot.speaker_bio]);
   return (
     <StyledSlotGridWrapper>
       <StyledType type={slot.type} />
@@ -96,9 +104,11 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
           <b>{`${slot.start} ${slot.end ? '-' : ''} ${slot.end || ''}`}</b>
         </StyledTime>
         {slot.duration && (
-          <StyledDuration>{slot.duration || 'Ikke oppgitt'}</StyledDuration>
+          <StyledDuration>
+            {slot.duration ? `${slot.duration} minutter` : 'Ikke oppgitt'}
+          </StyledDuration>
         )}
-        {slot.description && (
+        {slot.description && slot.type && slot.type !== 'other' && (
           <StyledDescription ref={descriptionRef}>
             <div
               css={
@@ -109,21 +119,19 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
                     `
               }>
               {slot.description}
-              {maxLength &&
-                showDescription && (
-                  <ShowButton
-                    showDescription={showDescription}
-                    setShowDescription={setShowDescription}
-                  />
-                )}
-            </div>
-            {maxLength &&
-              !showDescription && (
+              {maxLength && showDescription && (
                 <ShowButton
                   showDescription={showDescription}
                   setShowDescription={setShowDescription}
                 />
               )}
+            </div>
+            {maxLength && !showDescription && (
+              <ShowButton
+                showDescription={showDescription}
+                setShowDescription={setShowDescription}
+              />
+            )}
           </StyledDescription>
         )}
         <StyledFavorite>
@@ -142,9 +150,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
             </StyledUserIcon>
             <StyledUserLabel>Foredragsholdere</StyledUserLabel>
             <StyledUserName>
-              {slot.userIds.map(userId => (
-                <span>{userId}</span>
-              ))}
+              <SlotSpeakers userIds={slot.userIds.split(',')} />
             </StyledUserName>
           </StyledSpeakers>
         )}
@@ -156,6 +162,32 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
             <StyledRoomLabel>Rom:</StyledRoomLabel>
             <StyledRoomName>{slot.room}</StyledRoomName>
           </StyledRoom>
+        )}
+        {slot.speaker_bio && slot.type && slot.type !== 'other' && (
+          <StyledSpeakerBio ref={speakerbioRef}>
+            <div
+              css={
+                maxLength && !showSpeakerbio
+                  ? maxLengthStyle(maxLength)
+                  : css`
+                      display: inline-block;
+                    `
+              }>
+              {slot.speaker_bio}
+              {maxLength && showSpeakerbio && (
+                <ShowButton
+                  showDescription={showSpeakerbio}
+                  setShowDescription={setSpeakerbio}
+                />
+              )}
+            </div>
+            {maxLength && !showSpeakerbio && (
+              <ShowButton
+                showDescription={showSpeakerbio}
+                setShowDescription={setSpeakerbio}
+              />
+            )}
+          </StyledSpeakerBio>
         )}
       </StyledSlotGrid>
     </StyledSlotGridWrapper>

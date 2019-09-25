@@ -1,3 +1,5 @@
+const secrets = require('./secrets');
+
 module.exports = {
   siteMetadata: {
     title: 'Knowit Praha 2019',
@@ -13,6 +15,18 @@ module.exports = {
       },
     },
     `gatsby-transformer-remark`,
+    {
+      resolve: 'gatsby-source-airtable',
+      options: {
+        apiKey: secrets.AIRTABLE.API_SECRET,
+        tables: [
+          {
+            baseId: secrets.AIRTABLE.BASE_ID,
+            tableName: secrets.AIRTABLE.TABLE_NAME,
+          },
+        ],
+      },
+    },
   ],
   pathPrefix: '/',
 };

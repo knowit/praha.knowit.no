@@ -1,8 +1,8 @@
+import React, { useEffect, useState } from 'react';
 import { css } from '@emotion/core';
 import styled from '@emotion/styled';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { isToday } from 'date-fns';
-import React, { useEffect, useState } from 'react';
 import ButtonGroup from '../components/ButtonGroup';
 import Content from '../components/Content';
 import ContentSection from '../components/ContentSection';
@@ -14,6 +14,8 @@ import DefaultLayout from '../layouts';
 import colors from '../util/colors';
 import mediaQueries from '../util/mediaQueries';
 import spacing from '../util/spacing';
+import { fetchSlots } from '../graphql/airtable';
+import { filterTypes } from '../components/Filters/Filters';
 
 const buttonGroupStyle = numberOfButtons => css`
   margin: ${spacing.large} auto;
@@ -88,38 +90,35 @@ export const getActiveDay = () => {
 
 const SchedulePage = ({ location }) => {
   const StyledSafeLink = StyledLink.withComponent(SafeLink);
-  const [activeFilter, setActiveFilter] = useState('');
-  const dayInUrl = viewmodel.schedules.find(
+  const [activeFilters, setActiveFilters] = useState(
+    filterTypes.map(filter => filter.type),
+  );
+  const dayInUrl = viewmodel.days.find(
     scheduleDay => scheduleDay.date === location.hash.substring(1),
   );
   const activeDay = dayInUrl || getActiveDay();
   if (!activeDay || !activeDay.date) {
     return <span>Her skjedde noe feil gitt...</span>;
   }
-
-  const onChangeActiveFilter = newFilter => {
-    const updatedActiveFilter = newFilter === activeFilter ? '' : newFilter;
-    setActiveFilter(updatedActiveFilter);
+  const slots = fetchSlots();
+  const onChangeActiveFilters = newFilter => {
+    const updatedActiveFilters = activeFilters.includes(newFilter)
+      ? activeFilters.filter(filter => filter !== newFilter)
+      : [...activeFilters, newFilter];
+    setActiveFilters(updatedActiveFilters);
   };
 
-  useEffect(
-    () => {
-      setActiveFilter('');
-    },
-    [location],
-  );
+  useEffect(() => {
+    setActiveFilters(filterTypes.map(filter => filter.type));
+  }, [location]);
 
-  const currenSlots = viewmodel.schedules
+  const currenSlots = slots
     .filter(slot => slot.date === activeDay.date)
-    .filter(slot => {
-      if (activeFilter === '') {
-        return true;
-      }
-      if (!slot.type) {
-        return activeFilter === 'other';
-      }
-      return slot.type === activeFilter;
-    });
+    .filter(slot =>
+      activeFilters.length > 0
+        ? activeFilters.includes(slot.type || 'other')
+        : true,
+    );
 
   return (
     <DefaultLayout>
@@ -147,10 +146,10 @@ const SchedulePage = ({ location }) => {
         </ContentSection>
         <ContentSection minHeight="95vh" withTopSeperator withBottomSeperator>
           <Filters
-            activeFilter={activeFilter}
-            onChangeActiveFilter={onChangeActiveFilter}
+            activeFilters={activeFilters}
+            onChangeActiveFilters={onChangeActiveFilters}
           />
-          <Slots activeFilter={activeFilter} slots={currenSlots} />
+          <Slots activeFilter={activeFilters} slots={currenSlots} />
         </ContentSection>
       </Content>
     </DefaultLayout>

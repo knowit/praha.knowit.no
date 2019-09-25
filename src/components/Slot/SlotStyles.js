@@ -19,7 +19,8 @@ const gridTemplates = {
         'time     title       favorite'
         'duration description favorite'
         '.        speakers    speakers'
-        '.        room        room';
+        '.        room        room'
+        '.        speakerBio        .';
     `,
     mobile: css`
       grid-template-rows: auto auto auto auto auto auto;
@@ -30,7 +31,8 @@ const gridTemplates = {
         'title       title'
         'description description'
         'speakers    speakers'
-        'room        room';
+        'room        room'
+        'speakerBio .';
     `,
   },
   keynote: {
@@ -41,7 +43,8 @@ const gridTemplates = {
         'time     title       favorite'
         'duration description favorite'
         '.        speakers    speakers'
-        '.        room        room';
+        '.        room        room'
+        '.        speakerBio        .';
     `,
     mobile: css`
       grid-template-rows: auto auto auto auto auto auto;
@@ -52,17 +55,19 @@ const gridTemplates = {
         'title       title'
         'description description'
         'speakers    speakers'
-        'room        room';
+        'room        room'
+        'speakerBio .';
     `,
   },
   other: {
     desktop: css`
       grid-template-rows: auto auto;
-      grid-template-columns: 10% auto 10%;
+      grid-template-columns: 10% auto 10%; 
       align-items: center;
       grid-template-areas:
         'time title favorite'
-        'time    title    favorite';
+        'time    title    favorite'
+        '-    room     room';
     `,
     mobile: css`
       grid-template-rows: auto auto auto;
@@ -70,7 +75,8 @@ const gridTemplates = {
       grid-template-areas:
         'time  favorite'
         '.     favorite'
-        'title title';
+        'title title'
+        'room room';
     `,
   },
 };
@@ -197,6 +203,11 @@ export const StyledSpeakers = styled.div`
       'speakerIcon speakerName';
   }
 `;
+
+export const StyledSpeakerBio = styled.div`
+  grid-area: speakerBio;
+`;
+
 
 export const StyledUserIcon = styled.div`
   grid-area: speakerIcon;

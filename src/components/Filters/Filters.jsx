@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
+import Done from '@material-ui/icons/Done';
 import { typeColors } from '../Slot/SlotStyles';
 import Button from '../Button';
 import css from '@emotion/css';
 import spacing from '../../util/spacing';
 import mediaQueries from '../../util/mediaQueries';
-const filters = [
+
+export const filterTypes = [
   { label: 'Felles', type: 'other' },
   { label: 'Keynote', type: 'keynote' },
   { label: 'Talk', type: 'talk' },
@@ -40,42 +42,44 @@ const outlinedFilter = type => css`
   border: 2px solid ${typeColors[type]};
 `;
 
-const getStyle = (isHover, isActive, isFilter, type) => {
-  if (!isFilter) {
-    return isHover ? outlinedFilter(type) : filledFilter(type);
-  }
+const getStyle = (isHover, isActive, type) => {
   if (isHover) {
     return isActive ? outlinedFilter(type) : filledFilter(type);
   }
   return isActive ? filledFilter(type) : outlinedFilter(type);
 };
 
-const filterButtonStyle = (type = 'other', isActive = false, isFilter) => css`
+const filterButtonStyle = (type = 'other', isActive = false) => css`
   &,
   &:focus {
-    ${getStyle(false, isActive, isFilter, type)};
+    display: flex;
+    justify-content: center;
+    line-height: 1.8rem;
+    ${getStyle(false, isActive, type)};
   }
 
   &:hover {
-    ${getStyle(true, isActive, isFilter, type)};
+    display: flex;
+    justify-content: center;
+    line-height: 1.8rem;
+    ${getStyle(true, isActive, type)};
   }
 `;
 
-const Filters = ({ activeFilter, onChangeActiveFilter }) => {
-  const isFilter = activeFilter !== '';
+const Filters = ({ activeFilters, onChangeActiveFilters }) => {
   return (
     <StyledFilters>
-      {filters.map(filter => (
+      {filterTypes.map(filter => (
         <Button
           key={filter.type}
-          onClick={() => onChangeActiveFilter(filter.type)}
+          onClick={() => onChangeActiveFilters(filter.type)}
           appearance="stripped"
           css={filterButtonStyle(
             filter.type,
-            filter.type === activeFilter,
-            isFilter,
+            activeFilters.includes(filter.type),
           )}>
           {filter.label}
+          {activeFilters.includes(filter.type) && <Done />}
         </Button>
       ))}
     </StyledFilters>
@@ -83,8 +87,8 @@ const Filters = ({ activeFilter, onChangeActiveFilter }) => {
 };
 
 Filters.propTypes = {
-  activeFilter: PropTypes.string,
-  onChangeActiveFilter: PropTypes.func.isRequired,
+  activeFilters: PropTypes.arrayOf(PropTypes.string),
+  onChangeActiveFilters: PropTypes.func.isRequired,
 };
 
 export default Filters;
