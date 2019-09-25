@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import SpeakerModal from '../SpeakerModal';
 import styled from '@emotion/styled';
 import Person from '@material-ui/icons/Person';
@@ -6,7 +6,6 @@ import mediaQueries from '../../util/mediaQueries';
 
 const StyledModalContent = styled.div`
   display: grid;
-  overflow: scroll;
   grid-template-rows: 20% 80%;
   grid-template-columns: 30% 70%;
   align-items: center;
