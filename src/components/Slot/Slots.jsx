@@ -36,7 +36,7 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
     return Object.keys(groupedByDate)
       .sort()
       .map(startKey => (
-        <div>
+        <div key={startKey}>
           <h3>{viewmodel.days.find(day => day.date === startKey).label}</h3>
           {groupedByDate[startKey]
             .sort((a, b) => (a.start > b.start ? 1 : -1))
@@ -56,7 +56,7 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
   return Object.keys(groupedByStart)
     .sort()
     .map(startKey => (
-      <div>
+      <div key={startKey}>
         <h3>{startKey}</h3>
         {groupedByStart[startKey].map((slot, index) => (
           <Slot

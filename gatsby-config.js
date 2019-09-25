@@ -5,8 +5,10 @@ module.exports = {
     title: 'Knowit Praha 2019',
   },
   plugins: [
+    'gatsby-plugin-sharp',
+    'gatsby-transformer-sharp',
     'gatsby-plugin-react-helmet',
-    `gatsby-plugin-emotion`,
+    'gatsby-plugin-emotion',
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,6 +25,7 @@ module.exports = {
           {
             baseId: secrets.AIRTABLE.BASE_ID,
             tableName: secrets.AIRTABLE.TABLE_NAME,
+            mapping: { speaker_image: 'fileNode' },
           },
         ],
       },

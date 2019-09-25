@@ -4,7 +4,7 @@ import DefaultLayout from '../layouts';
 import ContentSection from '../components/ContentSection';
 import { getCookie } from '../util/cookieHelper';
 import Slots from '../components/Slot/Slots';
-import {fetchSlots} from "../graphql/airtable";
+import { fetchSlots } from '../graphql/airtable';
 
 const FavoritesPage = () => {
   const [favorites, setFavorites] = useState([]);
@@ -17,15 +17,18 @@ const FavoritesPage = () => {
   }, []);
 
   const slots = fetchSlots();
-  const allCollections = slots.filter(
-    ({ date, start, time, title }) =>
-      isActive(`${date}_${start || time}_${title}`),
+  const allCollections = slots.filter(({ date, start, time, title }) =>
+    isActive(`${date}_${start || time}_${title}`),
   );
   return (
     <DefaultLayout>
       <Content>
         <ContentSection minHeight="100vh" withTopSeperator withBottomSeperator>
-          <Slots slots={allCollections} removeFavorite={setFavorites} isFavourites />
+          <Slots
+            slots={allCollections}
+            removeFavorite={setFavorites}
+            isFavourites
+          />
         </ContentSection>
       </Content>
     </DefaultLayout>

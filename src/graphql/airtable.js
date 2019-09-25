@@ -18,6 +18,15 @@ export const fetchSlots = () => {
               duration
               room
               speaker_bio
+              speaker_image {
+                localFiles {
+                  childImageSharp {
+                    fluid(maxWidth: 400) {
+                      src
+                    }
+                  }
+                }
+              }
             }
           }
         }
