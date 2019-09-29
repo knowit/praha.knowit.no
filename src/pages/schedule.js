@@ -110,6 +110,10 @@ const SchedulePage = ({ location }) => {
 
   useEffect(() => {
     setActiveFilters(filterTypes.map(filter => filter.type));
+  }, []);
+
+  useEffect(() => {
+    setActiveFilters(filterTypes.map(filter => filter.type));
   }, [location]);
 
   const currenSlots = slots
