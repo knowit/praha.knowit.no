@@ -82,7 +82,6 @@ const Speaker = ({
     speaker_image.localFiles &&
     speaker_image.localFiles[0] &&
     speaker_image.localFiles[0].publicURL;
-  console.log(imageUrl, speaker_image);
   return (
     <StyledSpeakerContainer>
       {imageUrl ? (

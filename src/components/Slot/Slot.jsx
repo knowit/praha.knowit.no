@@ -94,7 +94,6 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
     }
   }, [slot.speaker_bio]);
 
-  console.log('SLOT', slot);
   return (
     <StyledSlotGridWrapper>
       <StyledType type={slot.type} />
