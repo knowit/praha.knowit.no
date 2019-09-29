@@ -18,13 +18,11 @@ export const fetchSlots = () => {
               duration
               room
               speaker_bio
+              speaker_favourites
+              speaker_recreation
               speaker_image {
                 localFiles {
-                  childImageSharp {
-                    fluid(maxWidth: 400) {
-                      src
-                    }
-                  }
+                  publicURL
                 }
               }
             }
