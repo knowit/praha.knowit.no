@@ -21,9 +21,9 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
   }, []);
 
   if (noGroupBy) {
-    return slots.map((slot, index) => (
+    return slots.map(slot => (
       <Slot
-        key={`${slot.title}_${index}`}
+        key={slot.title}
         slot={slot}
         setFavorites={updateFavorites}
         favorites={favorites}
@@ -40,9 +40,9 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
           <h3>{viewmodel.days.find(day => day.date === startKey).label}</h3>
           {groupedByDate[startKey]
             .sort((a, b) => (a.start > b.start ? 1 : -1))
-            .map((slot, index) => (
+            .map(slot => (
               <Slot
-                key={`${slot.title}_${index}`}
+                key={slot.title}
                 slot={slot}
                 setFavorites={updateFavorites}
                 favorites={favorites}
@@ -58,9 +58,9 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
     .map(startKey => (
       <div key={startKey}>
         <h3>{startKey}</h3>
-        {groupedByStart[startKey].map((slot, index) => (
+        {groupedByStart[startKey].map(slot => (
           <Slot
-            key={`${slot.title}_${index}`}
+            key={slot.title}
             slot={slot}
             setFavorites={updateFavorites}
             favorites={favorites}

@@ -93,6 +93,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
       }
     }
   }, [slot.speaker_bio]);
+
   return (
     <StyledSlotGridWrapper>
       <StyledType type={slot.type} />
