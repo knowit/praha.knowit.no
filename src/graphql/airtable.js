@@ -20,11 +20,6 @@ export const fetchSlots = () => {
               speaker_bio
               speaker_favourites
               speaker_recreation
-              speaker_image {
-                localFiles {
-                  publicURL
-                }
-              }
             }
           }
         }
