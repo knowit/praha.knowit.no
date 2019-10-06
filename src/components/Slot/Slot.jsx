@@ -14,7 +14,6 @@ import {
   StyledType,
   StyledDescription,
   StyledSpeakers,
-  StyledSpeakerBio,
   StyledFavorite,
   StyledRoom,
   StyledDuration,
@@ -71,10 +70,9 @@ ShowButton.propTypes = {
 
 const Slot = ({ slot, date, favorites, setFavorites }) => {
   const descriptionRef = React.createRef();
-  const speakerbioRef = React.createRef();
+
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
-  const [showSpeakerbio, setSpeakerbio] = useState(false);
 
   useEffect(() => {
     if (descriptionRef && descriptionRef.current) {
@@ -84,15 +82,6 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
       }
     }
   }, [slot.description]);
-
-  useEffect(() => {
-    if (speakerbioRef && speakerbioRef.current) {
-      const getBoundingClientRectData = speakerbioRef.current.getBoundingClientRect();
-      if (getBoundingClientRectData.height > 25) {
-        setMaxLength(getBoundingClientRectData.width - spacing.spacingUnit * 3);
-      }
-    }
-  }, [slot.speaker_bio]);
 
   return (
     <StyledSlotGridWrapper>

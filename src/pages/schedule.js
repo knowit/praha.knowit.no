@@ -94,25 +94,15 @@ const SchedulePage = ({ location }) => {
     filterTypes.map(filter => filter.type),
   );
 
-  const [slots, setSlots] = useState([]);
+  //const [slots, setSlots] = useState([]);
   const dayInUrl = viewmodel.days.find(
     scheduleDay => scheduleDay.date === location.hash.substring(1),
   );
   const activeDay = dayInUrl || getActiveDay();
-  if (!activeDay || !activeDay.date) {
-    return <span>Her skjedde noe feil gitt...</span>;
-  }
-  const onChangeActiveFilters = newFilter => {
-    const updatedActiveFilters = activeFilters.includes(newFilter)
-      ? activeFilters.filter(filter => filter !== newFilter)
-      : [...activeFilters, newFilter];
-    setActiveFilters(updatedActiveFilters);
-  };
-
+  const slots = fetchSlots();
   useEffect(() => {
     setActiveFilters(filterTypes.map(filter => filter.type));
-    const slots = fetchSlots();
-    setSlots(slots);
+    //setSlots(fetchedSlots);
   }, []);
 
   useEffect(() => {
@@ -126,6 +116,15 @@ const SchedulePage = ({ location }) => {
         ? activeFilters.includes(slot.type || 'other')
         : true,
     );
+  if (!activeDay || !activeDay.date) {
+    return <span>Her skjedde noe feil gitt...</span>;
+  }
+  const onChangeActiveFilters = newFilter => {
+    const updatedActiveFilters = activeFilters.includes(newFilter)
+      ? activeFilters.filter(filter => filter !== newFilter)
+      : [...activeFilters, newFilter];
+    setActiveFilters(updatedActiveFilters);
+  };
 
   return (
     <DefaultLayout>

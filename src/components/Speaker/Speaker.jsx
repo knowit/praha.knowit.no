@@ -6,8 +6,10 @@ import SpeakerFavourites from './SpeakerFavourites';
 
 const StyledSpeakerContainer = styled.div`
   display: grid;
-  grid-template-rows 10% auto auto;
-  grid-template-columns: 30% 35% 35;
+  overflow-y: scroll;
+  align-content: start;
+  grid-template-rows: max-content auto auto;
+  grid-template-columns: 30% 35% 35%;
   align-items: center;
   grid-template-areas:
     'image title       title '

@@ -182,6 +182,7 @@ export const StyledRoomName = styled.b`
 
 export const StyledDescription = styled.div`
   grid-area: description;
+  display: flex;
 `;
 
 export const StyledSpeakers = styled.div`
@@ -215,6 +216,7 @@ export const StyledUserLabel = styled.div`
 
 export const StyledUserName = styled.b`
   grid-area: speakerName;
-  display: flex;
-  flex-direction: column;
+  & button {
+    text-align: left;
+  }
 `;

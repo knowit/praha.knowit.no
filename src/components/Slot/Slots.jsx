@@ -23,7 +23,7 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
   if (noGroupBy) {
     return slots.map(slot => (
       <Slot
-        key={slot.title}
+        key={`${slot.title}_${slot.room}`}
         slot={slot}
         setFavorites={updateFavorites}
         favorites={favorites}
@@ -42,7 +42,7 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
             .sort((a, b) => (a.start > b.start ? 1 : -1))
             .map(slot => (
               <Slot
-                key={slot.title}
+                key={`${slot.title}_${slot.room}`}
                 slot={slot}
                 setFavorites={updateFavorites}
                 favorites={favorites}
@@ -60,7 +60,7 @@ const Slots = ({ slots, removeFavorite, noGroupBy, isFavourites }) => {
         <h3>{startKey}</h3>
         {groupedByStart[startKey].map(slot => (
           <Slot
-            key={slot.title}
+            key={`${slot.title}_${slot.room}`}
             slot={slot}
             setFavorites={updateFavorites}
             favorites={favorites}

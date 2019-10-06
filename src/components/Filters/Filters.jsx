@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import Done from '@material-ui/icons/Done';
 import { typeColors } from '../Slot/SlotStyles';
 import Button from '../Button';
 import css from '@emotion/css';
@@ -79,7 +78,6 @@ const Filters = ({ activeFilters, onChangeActiveFilters }) => {
             activeFilters.includes(filter.type),
           )}>
           {filter.label}
-          {activeFilters.includes(filter.type) && <Done />}
         </Button>
       ))}
     </StyledFilters>
