@@ -94,14 +94,15 @@ const SchedulePage = ({ location }) => {
     filterTypes.map(filter => filter.type),
   );
 
-  const [slots, setSlots] = useState(fetchSlots());
+  const [slots, setSlots] = useState([]);
   const dayInUrl = viewmodel.days.find(
     scheduleDay => scheduleDay.date === location.hash.substring(1),
   );
   const activeDay = dayInUrl || getActiveDay();
+  const fetchedSlots = fetchSlots();
   useEffect(() => {
     setActiveFilters(filterTypes.map(filter => filter.type));
-    //setSlots(fetchedSlots);
+    setSlots(fetchedSlots);
   }, []);
 
   useEffect(() => {

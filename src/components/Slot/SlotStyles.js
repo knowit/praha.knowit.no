@@ -93,7 +93,7 @@ export const StyledSlotGridWrapper = styled.div`
   @media (${mediaQueries.medium}) {
     margin: ${spacing.small} 0;
     grid-template-rows: ${spacing.small} auto;
-    grid-template-columns: auto;
+    grid-template-columns: 100%;
     grid-template-areas:
       'type'
       'allContent';
