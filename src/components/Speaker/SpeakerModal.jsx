@@ -27,8 +27,8 @@ const StyledModal = styled.div`
   padding: ${spacing.normal};
   max-height: 90vh;
   @media (${mediaQueries.medium}) {
-    max-width: 90%;
-    width: 90%;
+    max-width: 100%;
+    width: 100%;
     max-height: 100vh;
   }
 `;
