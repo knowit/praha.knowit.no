@@ -14,21 +14,22 @@ import Close from '@material-ui/icons/Close';
 const useStyles = makeStyles(theme => ({
   modal: {
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
     margin: '0 auto',
+    overflowY: 'scroll',
   },
 }));
 
 const StyledModal = styled.div`
   max-width: 60%;
   width: 60%;
+  overflow-y: scroll;
   background-color: white;
   padding: ${spacing.normal};
-  max-height: 100vh;
+  max-height: 90vh;
   @media (${mediaQueries.medium}) {
     max-width: 90%;
     width: 90%;
+    max-height: 100vh;
   }
 `;
 
