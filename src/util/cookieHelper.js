@@ -7,11 +7,11 @@ export const setCookie = (name, value, removeCookie) => {
     d.setTime(d.getTime() + 9999 * 24 * 60 * 60 * 1000);
     expires = `expires=${d.toUTCString()}`;
   }
-  document.cookie = `${name}=${value}; ${expires}; path=/`;
+  document.cookie = `${name}=${encodeURIComponent(value)}; ${expires}; path=/`;
 };
 
 export const getCookie = (name, cookies) => {
-  const value = `; ${cookies}`;
+  const value = `; ${decodeURIComponent(cookies)}`;
   const cookieParts = value.split(`; ${name}=`);
   if (cookieParts.length > 1) {
     return cookieParts
