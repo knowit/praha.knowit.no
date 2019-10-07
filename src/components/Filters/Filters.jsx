@@ -49,15 +49,15 @@ const getStyle = (isHover, isActive, type) => {
 };
 
 const filterButtonStyle = (type = 'other', isActive = false) => css`
-  &,
-  &:focus {
+  & {
     display: flex;
     justify-content: center;
     line-height: 1.8rem;
     ${getStyle(false, isActive, type)};
   }
 
-  &:hover {
+  &:hover,
+  &:focus {
     display: flex;
     justify-content: center;
     line-height: 1.8rem;
