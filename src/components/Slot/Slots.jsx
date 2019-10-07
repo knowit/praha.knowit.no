@@ -6,7 +6,7 @@ import Slot from '.';
 import { getCookie, setCookie } from '../../util/cookieHelper';
 import viewmodel from '../../json';
 import css from '@emotion/css';
-import spacing from '../../util/spacing';
+import mediaQueries from '../../util/mediaQueries';
 
 const getColumnStyle = viewType => {
   if (viewType === 'column') {
@@ -18,6 +18,14 @@ const getColumnStyle = viewType => {
         flex: 1 28%;
         width: 28%;
       }
+
+      @media (${mediaQueries.medium}) {
+        flex-direction: column;
+        & > * {
+          flex: 1 100%;
+          width: 100%;
+        }
+      }
     `;
   }
   return '';
@@ -26,7 +34,7 @@ const getColumnStyle = viewType => {
 const StyledSlots = styled.div`
   display: flex;
   flex-direction: ${p => (p.viewType === 'row' ? 'column' : 'row')};
-  ${p => getColumnStyle(p.viewType)}
+  ${p => getColumnStyle(p.viewType)};
 `;
 
 const Slots = ({
