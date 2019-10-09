@@ -68,25 +68,29 @@ ShowButton.propTypes = {
   setShowDescription: PropTypes.func.isRequired,
 };
 
-const Slot = ({ slot, date, favorites, setFavorites }) => {
+const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
   const descriptionRef = React.createRef();
 
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
 
   useEffect(() => {
-    if (descriptionRef && descriptionRef.current) {
-      const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
-      if (getBoundingClientRectData.height > 25) {
-        setMaxLength(getBoundingClientRectData.width - spacing.spacingUnit * 3);
+    setTimeout(() => {
+      if (descriptionRef && descriptionRef.current) {
+        const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
+        if (getBoundingClientRectData.height > 25) {
+          setMaxLength(
+            getBoundingClientRectData.width - spacing.spacingUnit * 3,
+          );
+        }
       }
-    }
-  }, [slot.description]);
+    }, 600);
+  }, [viewType]);
 
   return (
-    <StyledSlotGridWrapper>
-      <StyledType type={slot.type} />
-      <StyledSlotGrid type={slot.type}>
+    <StyledSlotGridWrapper viewType={viewType}>
+      <StyledType type={slot.type} viewType={viewType} />
+      <StyledSlotGrid type={slot.type} viewType={viewType}>
         <StyledTitle>
           <b>{slot.title}</b>
         </StyledTitle>
@@ -134,7 +138,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
           />
         </StyledFavorite>
         {slot.userIds && (
-          <StyledSpeakers>
+          <StyledSpeakers viewType={viewType}>
             <StyledUserIcon>
               <Person fontSize="small" />
             </StyledUserIcon>
@@ -145,7 +149,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
           </StyledSpeakers>
         )}
         {slot.room && (
-          <StyledRoom>
+          <StyledRoom viewType={viewType}>
             <StyledRoomIcon>
               <Home fontSize="small" />
             </StyledRoomIcon>
@@ -160,6 +164,7 @@ const Slot = ({ slot, date, favorites, setFavorites }) => {
 
 Slot.propTypes = {
   slot: PropTypes.object,
+  viewType: PropTypes.string,
 };
 
 export default Slot;

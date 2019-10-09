@@ -26,6 +26,8 @@ const StyledModal = styled.div`
   background-color: white;
   padding: ${spacing.normal};
   max-height: 90vh;
+  margin: 0 auto;
+
   @media (${mediaQueries.medium}) {
     max-width: 100%;
     width: 100%;
