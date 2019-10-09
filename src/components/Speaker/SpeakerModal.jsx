@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
 const StyledModal = styled.div`
   max-width: 60%;
   width: 60%;
-  overflow-y: scroll;
+  overflow-y: auto;
   background-color: white;
   padding: ${spacing.normal};
   max-height: 55vh;
