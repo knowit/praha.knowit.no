@@ -75,13 +75,17 @@ const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
   const [showDescription, setShowDescription] = useState(false);
 
   useEffect(() => {
-    if (descriptionRef && descriptionRef.current) {
-      const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
-      if (getBoundingClientRectData.height > 25) {
-        setMaxLength(getBoundingClientRectData.width - spacing.spacingUnit * 3);
+    setTimeout(() => {
+      if (descriptionRef && descriptionRef.current) {
+        const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
+        if (getBoundingClientRectData.height > 25) {
+          setMaxLength(
+            getBoundingClientRectData.width - spacing.spacingUnit * 3,
+          );
+        }
       }
-    }
-  }, [slot.description, viewType]);
+    }, 600);
+  }, [viewType]);
 
   return (
     <StyledSlotGridWrapper viewType={viewType}>

@@ -14,7 +14,7 @@ const gridTemplates = {
   talk: {
     desktop: css`
       grid-template-rows: auto;
-      grid-template-columns: 10% auto 10%;
+      grid-template-columns: 10% 78% 10%;
       grid-template-areas:
         'time     title       favorite'
         'duration description favorite'
@@ -36,7 +36,7 @@ const gridTemplates = {
   keynote: {
     desktop: css`
       grid-template-rows: auto;
-      grid-template-columns: 10% auto 10%;
+      grid-template-columns: 10% 78% 10%;
       grid-template-areas:
         'time     title       favorite'
         'duration description favorite'
@@ -58,12 +58,12 @@ const gridTemplates = {
   other: {
     desktop: css`
       grid-template-rows: auto auto;
-      grid-template-columns: 10% auto 10%;
+      grid-template-columns: 10% 78% 10%;
       align-items: center;
       grid-template-areas:
         'time title favorite'
         'time    title    favorite'
-        '-    room     room';
+        '.       room     room';
     `,
     mobile: css`
       grid-template-rows: auto auto auto;
