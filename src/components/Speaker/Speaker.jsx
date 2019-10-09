@@ -6,7 +6,6 @@ import SpeakerFavourites from './SpeakerFavourites';
 
 const StyledSpeakerContainer = styled.div`
   display: grid;
-  overflow-y: scroll;
   align-content: start;
   grid-template-rows: max-content auto auto;
   grid-template-columns: 30% 35% 35%;
