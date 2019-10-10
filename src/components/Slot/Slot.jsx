@@ -102,7 +102,7 @@ const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
             {slot.duration ? `${slot.duration} minutter` : 'Ikke oppgitt'}
           </StyledDuration>
         )}
-        {slot.description && slot.type && slot.type !== 'other' && (
+        {slot.description && (
           <StyledDescription ref={descriptionRef}>
             <div
               css={

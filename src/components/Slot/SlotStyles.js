@@ -62,17 +62,19 @@ const gridTemplates = {
       align-items: center;
       grid-template-areas:
         'time title favorite'
-        'time    title    favorite'
-        '.       room     room';
+        'time    title       favorite'
+        '.       description description'
+        '.       room        room';
     `,
     mobile: css`
       grid-template-rows: auto auto auto;
       grid-template-columns: 70% 30%;
       grid-template-areas:
-        'time  favorite'
-        '.     favorite'
-        'title title'
-        'room room';
+        'time        favorite'
+        '.           favorite'
+        'title       title'
+        'description description'
+        'room        room';
     `,
   },
 };
