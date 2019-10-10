@@ -57,7 +57,7 @@ const gridTemplates = {
   },
   other: {
     desktop: css`
-      grid-template-rows: auto auto;
+      grid-template-rows: auto auto auto;
       grid-template-columns: 10% 78% 10%;
       align-items: center;
       grid-template-areas:
@@ -67,7 +67,7 @@ const gridTemplates = {
         '.       room        room';
     `,
     mobile: css`
-      grid-template-rows: auto auto auto;
+      grid-template-rows: auto auto auto auto auto;
       grid-template-columns: 70% 30%;
       grid-template-areas:
         'time        favorite'
