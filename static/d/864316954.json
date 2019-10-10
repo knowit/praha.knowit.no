@@ -1,0 +1,1 @@
+{"errors":[{"message":"Cannot query field \"userId\" on type \"AirtableData\". Did you mean \"userIds\"?","locations":[{"line":7,"column":11}]}]}
