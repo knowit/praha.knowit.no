@@ -1,11 +1,13 @@
 import React from 'react';
 import styled from '@emotion/styled';
 import css from '@emotion/css';
+import spacing from '../../util/spacing';
 
 const StyledSpeakerFavourites = styled.div`
   align-self: start;
   margin: 0;
   flex: 1;
+  margin-right: ${spacing.normal};
 
   & > h2 {
     margin-left: 0;
@@ -52,7 +54,7 @@ const SpeakerFavourites = ({ speaker_favourites }) => {
       </h2>
       <StyledList>
         {splittedFavourites.map((favourite, index) => (
-          <li key={`favourite_${favourite}`}>{favourite}</li>
+          <li key={`favourite_${index}`}>{favourite}</li>
         ))}
       </StyledList>
     </StyledSpeakerFavourites>

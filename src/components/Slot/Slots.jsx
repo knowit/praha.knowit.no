@@ -11,7 +11,7 @@ import mediaQueries from '../../util/mediaQueries';
 const getColumnStyle = viewType => {
   if (viewType === 'column') {
     return css`
-      align-items: stretch;
+      align-items: baseline;
       flex-wrap: wrap;
 
       & > * {

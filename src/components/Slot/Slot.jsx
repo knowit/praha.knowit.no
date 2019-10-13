@@ -74,23 +74,26 @@ const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     setTimeout(() => {
       if (descriptionRef && descriptionRef.current) {
         const getBoundingClientRectData = descriptionRef.current.getBoundingClientRect();
-        if (getBoundingClientRectData.height > 25) {
+        if (getBoundingClientRectData.height > 30) {
           setMaxLength(
             getBoundingClientRectData.width - spacing.spacingUnit * 3,
           );
         }
       }
     }, 600);
-  }, [viewType]);
+  }, [viewType]);*/
 
   return (
     <StyledSlotGridWrapper viewType={viewType}>
       <StyledType type={slot.type} viewType={viewType} />
-      <StyledSlotGrid type={slot.type} viewType={viewType}>
+      <StyledSlotGrid
+        type={slot.type}
+        viewType={viewType}
+        rowGap={!slot.description && !slot.room && '0'}>
         <StyledTitle>
           <b>{slot.title}</b>
         </StyledTitle>

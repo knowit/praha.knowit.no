@@ -24,7 +24,8 @@ const StyledModal = styled.div`
   overflow-y: auto;
   background-color: white;
   padding: ${spacing.normal};
-  max-height: 55vh;
+  max-height: 80vh;
+  height: fit-content;
   margin: 0 auto;
 
   @media (${mediaQueries.medium}) {

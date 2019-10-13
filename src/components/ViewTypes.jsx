@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import ViewWeek from '@material-ui/icons/ViewWeek';
 import MoreVert from '@material-ui/icons/MoreVert';
 import Button from './Button';
 import css from '@emotion/css';
@@ -27,7 +27,7 @@ const filledViewType = type => css`
 const outlinedViewType = type => css`
   font-weight: 700;
   color: ${colors.blue};
-  background-color: white;
+  background-color: transparent;
   border: 1px solid ${colors.blue};
 `;
 
@@ -46,8 +46,17 @@ const viewTypeStyle = (isActive = false) => css`
 `;
 
 const types = [
-  { type: 'column', icon: <MoreHoriz /> },
-  { type: 'row', icon: <MoreVert /> },
+  { type: 'column', icon: <ViewWeek /> },
+  {
+    type: 'row',
+    icon: (
+      <ViewWeek
+        css={css`
+          transform: rotate(90deg);
+        `}
+      />
+    ),
+  },
 ];
 
 const ViewTypes = ({ currentViewType, onChangeViewType }) => {
