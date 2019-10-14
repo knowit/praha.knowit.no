@@ -3,8 +3,6 @@ import FavoriteIcon from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import colors from '../../util/colors';
 import Button from '../Button';
-import css from '@emotion/css';
-import spacing from '../../util/spacing';
 import styled from '@emotion/styled-base';
 
 const StyledFavoriteIcon = styled(FavoriteIcon)`
@@ -42,12 +40,7 @@ const AddFavorite = ({ title, date, startTime, setFavorites, favorites }) => {
   };
 
   return (
-    <Button
-      appearance="stripped"
-      onClick={changeFavorites}
-      css={css`
-        margin-right: ${spacing.small};
-      `}>
+    <Button appearance="stripped" onClick={changeFavorites}>
       {isFavoriteActive ? (
         <StyledFavoriteIcon fontSize="large" />
       ) : (

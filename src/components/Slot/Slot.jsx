@@ -24,6 +24,7 @@ import {
   StyledRoomName,
   StyledRoomIcon,
   StyledUserIcon,
+  StyledConnectionSlot,
 } from './SlotStyles';
 import SlotSpeakers from './SlotSpeakers';
 
@@ -73,7 +74,6 @@ const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
 
   const [maxLength, setMaxLength] = useState(undefined);
   const [showDescription, setShowDescription] = useState(false);
-
   /*useEffect(() => {
     setTimeout(() => {
       if (descriptionRef && descriptionRef.current) {

@@ -13,8 +13,6 @@ const StyledCodeOfConduct = styled.div`
 
 const StyledCodeOfConductText = styled.div`
   display: block;
-  margin: ${spacing.small} auto;
-
   @media (${mediaQueries.medium}) {
     max-width: 90%;
   }
@@ -27,7 +25,8 @@ const CodeOfConduct = () => {
   const props = useSpring({
     opacity: showCodeOfConduct ? 1 : 0,
     height: showCodeOfConduct ? listHeight : 0,
-    from: { opacity: 0, height: 0 },
+    overflow: showCodeOfConduct ? 'visible' : 'hidden',
+    from: { opacity: 0, height: 0, overflow: 'hidden' },
   });
   useEffect(() => {
     const getBoundingClientRectData = listRef.current.getBoundingClientRect();

@@ -36,10 +36,15 @@ const buttonGroupStyle = numberOfButtons => css`
   }
 `;
 
+const StyledContentChangers = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
 const isActiveStyle = css`
   color: white;
-  background-color: ${colors.blueDarkest};
-  border-color: ${colors.blueDarkest};
+  background-color: ${colors.blue};
+  border-color: ${colors.blue};
 `;
 
 const StyledLinkContainer = styled.div`
@@ -55,10 +60,10 @@ const StyledLinkContainer = styled.div`
 
 const StyledLink = styled.a`
   padding: ${spacing.small} ${spacing.normal};
-  background-color: ${colors.blue};
+  background-color: ${colors.blueDarkest};
   text-decoration: none;
   color: white;
-  border: 1px solid ${colors.blue};
+  border: 1px solid ${colors.blueDarkest};
   border-radius: 50px;
   text-align: center;
   display: ${p => p.isActive && isActiveStyle};
@@ -156,14 +161,16 @@ const SchedulePage = ({ location }) => {
           </ButtonGroup>
         </ContentSection>
         <ContentSection minHeight="95vh" withTopSeperator withBottomSeperator>
-          <Filters
-            activeFilters={activeFilters}
-            onChangeActiveFilters={onChangeActiveFilters}
-          />
-          <ViewTypes
-            currentViewType={viewType}
-            onChangeViewType={setViewType}
-          />
+          <StyledContentChangers>
+            <Filters
+              activeFilters={activeFilters}
+              onChangeActiveFilters={onChangeActiveFilters}
+            />
+            <ViewTypes
+              currentViewType={viewType}
+              onChangeViewType={setViewType}
+            />
+          </StyledContentChangers>
           <Slots
             activeFilter={activeFilters}
             slots={currenSlots}

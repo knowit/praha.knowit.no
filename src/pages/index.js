@@ -31,7 +31,10 @@ const Frontpage = () => (
           </Paragraph>
         </StyledLogoContainer>
       </ContentSection>
-      <ContentSection previousSectionColor={colors.blueDark} withTopSeperator>
+      <ContentSection
+        previousSectionColor={colors.blueDark}
+        withTopSeperator
+        minHeight="0">
         <h1>
           Fagseminar {eventData.season.longCapitalized} {eventData.year}
         </h1>

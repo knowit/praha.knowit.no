@@ -15,14 +15,14 @@ export const filterTypes = [
 
 const StyledFilters = styled.div`
   display: grid;
-  width: 40%;
   grid-template-rows: ${spacing.large};
   grid-template-columns: 30% 30% 30%;
-  margin: 0 auto;
+  width: 70%;
   grid-column-gap: ${spacing.normal};
   @media (${mediaQueries.medium}) {
     width: 100%;
     margin-top: ${spacing.large};
+    justify-content: space-between;
   }
 `;
 

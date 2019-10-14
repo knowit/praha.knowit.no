@@ -17,6 +17,7 @@ const globalStyles = css`
     font-size: 16px;
     color: ${colors.blueDark};
     word-spacing: ${spacing.spacingUnit / 6}px;
+    line-height: ${spacing.spacingUnit * 1.4}px;
   }
 
   body {

@@ -20,17 +20,19 @@ const useStyles = makeStyles(theme => ({
 
 const StyledModal = styled.div`
   max-width: 60%;
-  width: 60%;
+  width: 50%;
   overflow-y: auto;
   background-color: white;
   padding: ${spacing.normal};
   max-height: 80vh;
   height: fit-content;
   margin: 0 auto;
+  margin-top: ${spacing.xxlarge};
 
   @media (${mediaQueries.medium}) {
     max-width: 100%;
     width: 100%;
+    margin-top: 0;
     max-height: 100vh;
   }
 `;

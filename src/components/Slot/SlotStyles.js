@@ -14,7 +14,7 @@ const gridTemplates = {
   talk: {
     desktop: css`
       grid-template-rows: auto;
-      grid-template-columns: 10% 78% 10%;
+      grid-template-columns: 10% 80% 10%;
       grid-template-areas:
         'time     title       favorite'
         'duration description favorite'
@@ -36,7 +36,7 @@ const gridTemplates = {
   keynote: {
     desktop: css`
       grid-template-rows: auto;
-      grid-template-columns: 10% 78% 10%;
+      grid-template-columns: 10% 80% 10%;
       grid-template-areas:
         'time     title       favorite'
         'duration description favorite'
@@ -58,7 +58,7 @@ const gridTemplates = {
   other: {
     desktop: css`
       grid-template-rows: auto auto auto;
-      grid-template-columns: 10% 78% 10%;
+      grid-template-columns: 10% 80% 10%;
       align-items: center;
       grid-template-areas:
         'time title favorite'
@@ -172,7 +172,6 @@ export const StyledSlotGrid = styled.div`
   grid-area: allContent;
   padding: ${spacing.normal};
   grid-row-gap: ${p => p.rowGap || spacing.small};
-  grid-column-gap: ${spacing.normal};
   ${p => getSlotGridStyle(p.type, p.viewType, false)};
   & b {
     font-weight: 900;
