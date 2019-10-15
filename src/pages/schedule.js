@@ -175,6 +175,7 @@ const SchedulePage = ({ location }) => {
             activeFilter={activeFilters}
             slots={currenSlots}
             viewType={viewType}
+            activeDay={activeDay}
           />
         </ContentSection>
       </Content>
