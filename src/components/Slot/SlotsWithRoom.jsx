@@ -84,9 +84,11 @@ const SlotsWithRoom = ({ slot, date, favorites, setFavorites, viewType }) => {
                       <div
                         css={css`
                           display: inline-block;
-                        `}>
-                        {subSlot.description}
-                      </div>
+                        `}
+                        dangerouslySetInnerHTML={{
+                          __html: subSlot.description,
+                        }}
+                      />
                     </StyledDescription>
                   )}
                   <StyledFavorite>
