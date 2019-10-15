@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import Home from '@material-ui/icons/Home';
 import Person from '@material-ui/icons/Person';
 import AddFavorite from '../Favorites/AddFavorite';
-import spacing from '../../util/spacing';
-import Button from '../Button';
 import {
   StyledSlotGridWrapper,
   StyledSlotGrid,
@@ -24,7 +21,6 @@ import {
   StyledRoomName,
   StyledRoomIcon,
   StyledUserIcon,
-  StyledConnectionSlot,
 } from './SlotStyles';
 import SlotSpeakers from './SlotSpeakers';
 import styled from '@emotion/styled';
@@ -43,21 +39,24 @@ const StyledSlotWithRooms = styled.div`
 
 const SlotsWithRoom = ({ slot, date, favorites, setFavorites, viewType }) => {
   const groupedByRoom = groupBy(slot.slots, subSlot => subSlot.room);
-  console.log(groupedByRoom);
+  const sortedRoomsByLength = Object.keys(groupedByRoom)
+    .map(roomKey => {
+      const sortedSlots = groupedByRoom[roomKey].sort((a, b) => {
+        return (
+          new Date('1970/01/01 ' + a.start) - new Date('1970/01/01 ' + b.start)
+        );
+      });
+      return { roomKey, slots: sortedSlots };
+    })
+    .sort((a, b) => a.slots.length - b.slots.length);
 
   return (
     <>
-      {Object.keys(sortedGroupedByRoom).map(roomKey => {
-        const sortedRoom = sortedGroupedByRoom[roomKey].sort((a, b) => {
-          return (
-            new Date('1970/01/01 ' + a.start) -
-            new Date('1970/01/01 ' + b.start)
-          );
-        });
+      {sortedRoomsByLength.map(room => {
         return (
           <StyledSlotWithRooms viewType={viewType}>
-            <h3>{roomKey}</h3>
-            {sortedRoom.map(subSlot => (
+            <h3>{room.roomKey}</h3>
+            {room.slots.map(subSlot => (
               <StyledSlotGridWrapper viewType={viewType}>
                 <StyledType type={subSlot.type} viewType={viewType} />
                 <StyledSlotGrid

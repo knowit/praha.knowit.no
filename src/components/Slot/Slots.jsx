@@ -11,10 +11,10 @@ import SlotsWithRoom from './SlotsWithRoom';
 
 const groupSlots = {
   19: [
-    //{ start: '13:00', end: '13:30' },
+    { start: '13:00', end: '13:30' },
     { start: '13:45', end: '14:15' },
-    //{ start: '14:30', end: '15:00' },
-    //{ start: '15:15', end: '15:45' },
+    { start: '14:30', end: '15:00' },
+    { start: '15:15', end: '15:45' },
   ],
 };
 

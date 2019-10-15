@@ -1,12 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { css } from '@emotion/core';
-import ExpandMore from '@material-ui/icons/ExpandMore';
 import Home from '@material-ui/icons/Home';
 import Person from '@material-ui/icons/Person';
 import AddFavorite from '../Favorites/AddFavorite';
-import spacing from '../../util/spacing';
-import Button from '../Button';
 import {
   StyledSlotGridWrapper,
   StyledSlotGrid,
@@ -24,7 +21,6 @@ import {
   StyledRoomName,
   StyledRoomIcon,
   StyledUserIcon,
-  StyledConnectionSlot,
 } from './SlotStyles';
 import SlotSpeakers from './SlotSpeakers';
 
@@ -54,7 +50,7 @@ const Slot = ({ slot, date, favorites, setFavorites, viewType }) => {
                 display: inline-block;
               `}
               dangerouslySetInnerHTML={{
-                __html: subSlot.description,
+                __html: slot.description,
               }}
             />
           </StyledDescription>
