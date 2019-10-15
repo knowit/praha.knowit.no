@@ -36,7 +36,7 @@ const ViewTypes = ({ currentViewType, onChangeViewType }) => {
           css={css`
             color: ${colors.blue};
             transform: rotate(${currentViewType === 'row' ? 90 : 0}deg);
-            transition: transform 1s linear;
+            transition: transform 0.2s linear;
             &:hover {
               color: ${colors.blueDark};
             }
