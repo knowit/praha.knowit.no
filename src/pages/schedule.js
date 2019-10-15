@@ -121,11 +121,7 @@ const SchedulePage = ({ location }) => {
 
   const currenSlots = slots
     .filter(slot => slot.date === activeDay.date)
-    .filter(slot =>
-      activeFilters.length > 0
-        ? activeFilters.includes(slot.type || 'other')
-        : true,
-    );
+    .filter(slot => activeFilters.includes(slot.type || 'other'));
   if (!activeDay || !activeDay.date) {
     return <span>Her skjedde noe feil gitt...</span>;
   }
