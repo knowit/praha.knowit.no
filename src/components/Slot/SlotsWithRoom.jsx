@@ -32,8 +32,8 @@ const StyledSlotWithRooms = styled.div`
   width: ${p => (p.viewType === 'column' ? 28 : 100)}%;
 
   @media (${mediaQueries.medium}) {
-    flex: 1 28%;
-    width: 28%;
+    flex: 1 100%;
+    width: 100%;
   }
 `;
 
