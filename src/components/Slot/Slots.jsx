@@ -18,6 +18,49 @@ const groupSlots = {
   ],
 };
 
+const slotsMappedByRoom = (activeDay, slots) => {
+  const groups = groupSlots[activeDay.date];
+  if (!groups) {
+    return slots;
+  }
+  let newSlots = [];
+  slots.forEach(slot => {
+    const foundGroupStart = groups.find(group => group.start === slot.start);
+    const foundGroupEnd = groups.find(group => group.end === slot.end);
+    if (slot.type !== 'other' && (foundGroupStart || foundGroupEnd)) {
+      const start = foundGroupStart
+        ? foundGroupStart.start
+        : foundGroupEnd.start;
+      const end = foundGroupEnd ? foundGroupEnd.end : foundGroupStart.end;
+      const alreadyPushed = newSlots.find(newSlot => newSlot.start === start);
+
+      if (alreadyPushed) {
+        const alreadyPushedIndex = newSlots.findIndex(
+          newSlot => newSlot.start === start,
+        );
+        newSlots = [
+          ...newSlots.slice(0, alreadyPushedIndex),
+          {
+            ...newSlots[alreadyPushedIndex],
+            slots: [...newSlots[alreadyPushedIndex].slots, slot],
+          },
+          ...newSlots.slice(alreadyPushedIndex + 1),
+        ];
+      } else {
+        newSlots.push({
+          start,
+          end,
+          date: slot.date,
+          slots: [slot],
+        });
+      }
+    } else {
+      newSlots.push(slot);
+    }
+  });
+  return newSlots;
+};
+
 const getColumnStyle = viewType => {
   if (viewType === 'column') {
     return css`
@@ -109,51 +152,10 @@ const Slots = ({
       ));
   }
 
-  //const groupedByStart = groupBy(slots, slot => slot.start);
-
-  const newTestSlots = () => {
-    const groups = groupSlots[activeDay.date];
-    if (!groups) {
-      return slots;
-    }
-    let newSlots = [];
-    slots.forEach(slot => {
-      const foundGroupStart = groups.find(group => group.start === slot.start);
-      const foundGroupEnd = groups.find(group => group.end === slot.end);
-      if (slot.type !== 'other' && (foundGroupStart || foundGroupEnd)) {
-        const start = foundGroupStart
-          ? foundGroupStart.start
-          : foundGroupEnd.start;
-        const end = foundGroupEnd ? foundGroupEnd.end : foundGroupStart.end;
-        const alreadyPushed = newSlots.find(newSlot => newSlot.start === start);
-        const alreadyPushedIndex = newSlots.findIndex(
-          newSlot => newSlot.start === start,
-        );
-        if (alreadyPushed) {
-          newSlots = [
-            ...newSlots.slice(0, alreadyPushedIndex),
-            {
-              ...newSlots[alreadyPushedIndex],
-              slots: [...newSlots[alreadyPushedIndex].slots, slot],
-            },
-            ...newSlots.slice(alreadyPushedIndex + 1),
-          ];
-        } else {
-          newSlots.push({
-            start,
-            end,
-            date: slot.date,
-            slots: [slot],
-          });
-        }
-      } else {
-        newSlots.push(slot);
-      }
-    });
-    return newSlots;
-  };
-
-  const groupedByStart = groupBy(newTestSlots(), slot => slot.start);
+  const groupedByStart = groupBy(
+    slotsMappedByRoom(activeDay, slots),
+    slot => slot.start,
+  );
   return Object.keys(groupedByStart)
     .sort()
     .map(startKey => (

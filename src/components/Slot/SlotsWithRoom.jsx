@@ -48,7 +48,15 @@ const SlotsWithRoom = ({ slot, date, favorites, setFavorites, viewType }) => {
       });
       return { roomKey, slots: sortedSlots };
     })
-    .sort((a, b) => a.slots.length - b.slots.length);
+    .sort((a, b) => {
+      if (a.roomKey > b.roomKey) {
+        return 1;
+      }
+      if (a.roomKey < b.roomKey) {
+        return -1;
+      }
+      return 0;
+    });
 
   return (
     <>
