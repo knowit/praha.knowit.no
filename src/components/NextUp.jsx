@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import AccessTime from '@material-ui/icons/AccessTime';
 import take from 'lodash/take';
 import { closestIndexTo, isAfter, compareAsc } from 'date-fns';
@@ -12,7 +12,11 @@ import { fetchSlots } from '../graphql/airtable';
 
 const NextUp = () => {
   const today = new Date();
-  const slots = fetchSlots();
+  const [slots, setSlots] = useState([]);
+  const newSlots = fetchSlots();
+  useEffect(() => {
+    setSlots(newSlots);
+  }, []);
   const nextUpDates = slots
     .map(slot => {
       const startContainsColon = slot.start.includes(':');
