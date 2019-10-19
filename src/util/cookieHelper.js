@@ -12,13 +12,15 @@ export const setCookie = (name, value, removeCookie) => {
 
 export const getCookie = (name, cookies) => {
   try {
-    const value = `; ${decodeURIComponent(cookies)}`;
+    const value = `; ${cookies}`;
     const cookieParts = value.split(`; ${name}=`);
     if (cookieParts.length > 1) {
-      return cookieParts
-        .pop()
-        .split(';')
-        .shift();
+      return decodeURIComponent(
+        cookieParts
+          .pop()
+          .split(';')
+          .shift(),
+      );
     }
     return null;
   } catch (err) {
