@@ -241,6 +241,7 @@ export const StyledRoomName = styled.b`
 export const StyledDescription = styled.div`
   grid-area: description;
   display: flex;
+  word-break: break-word;
 `;
 
 export const StyledSpeakers = styled.div`

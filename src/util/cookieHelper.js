@@ -11,15 +11,20 @@ export const setCookie = (name, value, removeCookie) => {
 };
 
 export const getCookie = (name, cookies) => {
-  const value = `; ${decodeURIComponent(cookies)}`;
-  const cookieParts = value.split(`; ${name}=`);
-  if (cookieParts.length > 1) {
-    return cookieParts
-      .pop()
-      .split(';')
-      .shift();
+  try {
+    const value = `; ${decodeURIComponent(cookies)}`;
+    const cookieParts = value.split(`; ${name}=`);
+    if (cookieParts.length > 1) {
+      return cookieParts
+        .pop()
+        .split(';')
+        .shift();
+    }
+    return null;
+  } catch (err) {
+    console.error(err);
+    return null;
   }
-  return null;
 };
 
 export const isValidCookie = (name, cookies) =>
